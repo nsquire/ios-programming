@@ -16,17 +16,22 @@
     NSDate *dateCreated;
 }
 
-- (id) initWithItemName:(NSString *)name valueInDollars:(int)value serialNumber:(NSString *)sNumber;
+//- (void)doSomethingWierd;
 
-- (void) setItemName:(NSString *)str;
-- (NSString *) itemName;
++ (id)randomItem;
 
-- (void) setSerialNumber:(NSString *)str;
+- (id)initWithItemName:(NSString *)name serialNumber:(NSString *)sNumber;
+- (id)initWithItemName:(NSString *)name valueInDollars:(int)value serialNumber:(NSString *)sNumber;
+
+- (void)setItemName:(NSString *)str;
+- (NSString *)itemName;
+
+- (void)setSerialNumber:(NSString *)str;
 - (NSString *)serialNumber;
 
-- (void) setValueInDollars:(int)i;
-- (int) valueInDollars;
+- (void)setValueInDollars:(int)i;
+- (int)valueInDollars;
 
-- (NSDate *) dateCreated;
+- (NSDate *)dateCreated;
 
 @end

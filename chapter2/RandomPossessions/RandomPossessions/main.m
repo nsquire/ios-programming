@@ -35,18 +35,42 @@ int main(int argc, const char * argv[])
         }
         */
         
+         /*
         BNRItem *p = [[BNRItem alloc] initWithItemName:@"Red Sofa" valueInDollars:100 serialNumber:@"A1B2C"];
-        
-        /*
+       
         NSLog(@"%@", p);
         
         [p setItemName:@"Red Sofa"];
         [p setSerialNumber:@"A1B2C"];
         [p setValueInDollars:100];
-        */
         
         //NSLog(@"%@ %@ %@ %d", [p itemName], [p dateCreated], [p serialNumber], [p valueInDollars]);
         NSLog(@"%@", p);
+        */
+        
+        for (int i = 0; i < 10; i++) {
+            BNRItem *p = [BNRItem randomItem];
+            //[p doSomethingWierd];
+            [items addObject:p];
+        }
+        
+        /*
+        for (int i = 0; i < [items count]; i++) {
+            NSLog(@"%@", [items objectAtIndex:i]);
+        }
+        */
+        
+        for (BNRItem *item in items) {
+            NSLog(@"%@", item);
+        }
+        
+        // Bronze challenge
+        //BNRItem *error = [items objectAtIndex:10];
+        
+        // Silver challenge
+        BNRItem *p2 = [[BNRItem alloc] initWithItemName:@"Red Sofa2" serialNumber:@"A1B2C2"];
+        NSLog(@"p2: %@", p2);
+
         
         // Destroy the array pointed to by items
         items = nil;
