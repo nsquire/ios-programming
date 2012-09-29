@@ -13,6 +13,10 @@
     NSMutableArray *subItems;
 }
 
+// Getters and setters for subItems
+- (NSMutableArray *)subItems;
+- (void)setSubItems:(NSMutableArray *)items;
+
 -(NSString *)description;
 
 @end

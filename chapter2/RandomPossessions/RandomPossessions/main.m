@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BNRItem.h"
+#import "BNRContainer.h"
 
 int main(int argc, const char * argv[])
 {
@@ -74,6 +74,39 @@ int main(int argc, const char * argv[])
         
         // Destroy the array pointed to by items
         items = nil;
+        
+        // Gold challenge
+        
+        // Initialize objects
+        BNRContainer *container1 = [[BNRContainer alloc] initWithItemName:@"container 1"
+                                                           valueInDollars:1
+                                                             serialNumber:@"abc123"];
+        
+        BNRContainer *container2 = [[BNRContainer alloc] initWithItemName:@"container 2"
+                                                           valueInDollars:10
+                                                             serialNumber:@"abc789"];
+        
+        BNRItem *item1 = [[BNRItem alloc] initWithItemName:@"item 1"
+                                            valueInDollars:11
+                                              serialNumber:@"xyz123"];
+        
+        BNRItem *item2 = [[BNRItem alloc] initWithItemName:@"item 2"
+                                            valueInDollars:12
+                                              serialNumber:@"xyz789"];
+        
+        BNRItem *item3 = [[BNRItem alloc] initWithItemName:@"item 3"
+                                            valueInDollars:13
+                                              serialNumber:@"xyz999"];
+        
+        // Link Items to containers
+        [[container1 subItems] addObject:item1];
+        [[container1 subItems] addObject:item2];
+        [[container1 subItems] addObject:container2];
+        [[container2 subItems] addObject:item3];
+        
+        // Print out results
+        NSLog(@"%@", container1);
+
         
     }
     return 0;

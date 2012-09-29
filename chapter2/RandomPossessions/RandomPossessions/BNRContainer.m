@@ -24,16 +24,23 @@
 
 - (id)initWithItemName:(NSString *)name valueInDollars:(int)value serialNumber:(NSString *)sNumber
 {
-    self = [super init];
+    self = [super initWithItemName:name valueInDollars:value serialNumber:sNumber];
     
     if (self) {
-        [self setItemName:name];
-        [self setValueInDollars:value];
-        [self setSerialNumber:sNumber];
-        subItems = [NSMutableArray array]; // globalize?
+        subItems = [NSMutableArray array];
     }
     
     return self;
+}
+
+- (NSMutableArray *)subItems
+{
+    return subItems;
+}
+
+- (void)setSubItems:(NSMutableArray *)value
+{
+    subItems = value;
 }
 
 - (NSString *)description
@@ -49,10 +56,10 @@
         totalValue += [item valueInDollars];
     }
     
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"Name: %@, Total value: $%i", [self itemName], totalValue];
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"Name: %@, Total value: $%i with items:\n", [self itemName], totalValue];
     
     for (BNRItem *item in subItems) {
-        [desc appendFormat:@"%@", item];
+        [desc appendFormat:@"%@\n", item];
     }
     
     return desc;
