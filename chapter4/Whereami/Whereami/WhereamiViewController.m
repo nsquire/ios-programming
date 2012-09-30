@@ -13,6 +13,17 @@
 @end
 
 @implementation WhereamiViewController
+{}
+/*
+ - (void)doSomethingWierd
+ {
+ NSLog(@"Line 1");
+ NSLog(@"Line 2");
+ NSLog(@"Line 3");
+ }
+ */
+
+#pragma mark - Initialization methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,23 +42,30 @@
         // regardless of how much time/power it takes
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         
+        // Bronze challenge
+        [locationManager setDistanceFilter:50];
+        
         // Tell our manager to start looking for its location immediately
         [locationManager startUpdatingLocation];
+        
+        // Silver challenge
+        
+        if ([CLLocationManager headingAvailable]) {
+            // Set accuracy for heading updates
+            [locationManager setHeadingFilter:5];
+            
+            // Tell our manager to start looking for heading information immediately
+            [locationManager startUpdatingHeading];
+        } else {
+            NSLog(@"Heading info not available");
+        }
+        
     }
     
     return self;
 }
 
-/*
-- (void)doSomethingWierd
-{
-    NSLog(@"Line 1");
-    NSLog(@"Line 2");
-    NSLog(@"Line 3");
-}
-*/
-
-// CLLocationManager delegate methods
+#pragma mark - CLLocationManager delegate methods
 
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
@@ -61,6 +79,21 @@
 {
     NSLog(@"Could not find location: %@", error);
 }
+
+- (void)locationManager:(CLLocationManager *)manager
+       didUpdateHeading:(CLHeading *)newHeading
+{
+    if ([newHeading headingAccuracy] < 0) {
+        return;
+    }
+    
+    // Use the true heading if it is valid
+    CLLocationDirection theHeading = (([newHeading trueHeading] > 0) ? [newHeading trueHeading] : [newHeading magneticHeading]);
+    
+    NSLog(@"heading: %f", theHeading);
+}
+
+#pragma mark - Lifecycle methods
 
 - (void)dealloc
 {
