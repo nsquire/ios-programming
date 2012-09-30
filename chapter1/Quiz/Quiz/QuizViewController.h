@@ -24,5 +24,4 @@
 - (IBAction)showQuestion:(id)sender;
 - (IBAction)showAnswer:(id)sender;
 
-
 @end

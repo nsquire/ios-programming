@@ -134,7 +134,6 @@
 						<string key="NSFrame">{{20, 347}, {280, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -632,7 +631,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -650,6 +649,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="showAnswer:">id</string>
 						<string key="showQuestion:">id</string>
+						<string key="testMethod:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="showAnswer:">
@@ -658,6 +658,10 @@
 						</object>
 						<object class="IBActionInfo" key="showQuestion:">
 							<string key="name">showQuestion:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="testMethod:">
+							<string key="name">testMethod:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
