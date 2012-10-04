@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6A8670B16190365004894DD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A8670A16190365004894DD /* MapKit.framework */; };
 		A6B80DCC1617D46600B63AA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B80DCB1617D46600B63AA4 /* UIKit.framework */; };
 		A6B80DCE1617D46600B63AA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B80DCD1617D46600B63AA4 /* Foundation.framework */; };
 		A6B80DD01617D46600B63AA4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B80DCF1617D46600B63AA4 /* CoreGraphics.framework */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A6A8670A16190365004894DD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A6B80DC71617D46600B63AA4 /* Whereami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whereami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6B80DCB1617D46600B63AA4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A6B80DCD1617D46600B63AA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B80DEF1617DAF600B63AA4 /* CoreLocation.framework in Frameworks */,
+				A6A8670B16190365004894DD /* MapKit.framework in Frameworks */,
 				A6B80DCC1617D46600B63AA4 /* UIKit.framework in Frameworks */,
 				A6B80DCE1617D46600B63AA4 /* Foundation.framework in Frameworks */,
 				A6B80DD01617D46600B63AA4 /* CoreGraphics.framework in Frameworks */,
@@ -77,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				A6B80DEE1617DAF600B63AA4 /* CoreLocation.framework */,
+				A6A8670A16190365004894DD /* MapKit.framework */,
 				A6B80DCB1617D46600B63AA4 /* UIKit.framework */,
 				A6B80DCD1617D46600B63AA4 /* Foundation.framework */,
 				A6B80DCF1617D46600B63AA4 /* CoreGraphics.framework */,
@@ -296,6 +300,7 @@
 				A6B80DED1617D46600B63AA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

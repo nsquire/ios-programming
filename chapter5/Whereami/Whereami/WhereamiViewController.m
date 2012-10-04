@@ -13,6 +13,9 @@
 @end
 
 @implementation WhereamiViewController
+{}
+
+#pragma mark - Initialization methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +35,7 @@
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         
         // Tell our manager to start looking for its location immediately
-        [locationManager startUpdatingLocation];
+        //[locationManager startUpdatingLocation];
     }
     
     return self;
@@ -47,7 +50,7 @@
 }
 */
 
-// CLLocationManager delegate methods
+#pragma mark - CLLocationManager delegate methods
 
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
@@ -60,6 +63,22 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"Could not find location: %@", error);
+}
+
+#pragma mark - MKMapView delegate methods
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    CLLocationCoordinate2D loc = [userLocation coordinate];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 250, 250);
+    [worldView setRegion:region animated:YES];
+}
+
+#pragma mark - View lifecycle methods
+
+- (void)viewDidLoad
+{
+    [worldView setShowsUserLocation:YES];
 }
 
 - (void)dealloc
