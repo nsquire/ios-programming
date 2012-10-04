@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface WhereamiViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface WhereamiViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, UITextInputDelegate>
 {
     CLLocationManager *locationManager;
     
@@ -19,6 +19,7 @@
     IBOutlet UITextField *locationTitleField;
 }
 
-//- (void)doSomethingWierd;
+- (void)findLocation;
+- (void)foundLocation:(CLLocation *)loc;
 
 @end
