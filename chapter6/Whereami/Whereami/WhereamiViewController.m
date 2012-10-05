@@ -34,18 +34,9 @@
         
         // Tell our manager to start looking for its location immediately
         //[locationManager startUpdatingLocation];
-        
-        // Silver challenge
-        segmentedControl = [[UISegmentedControl alloc] init];
-        [segmentedControl addTarget:self action:@selector(test:) forControlEvents:UIControlEventValueChanged];
     }
     
     return self;
-}
-
-- (void)test
-{
-    NSLog(@"test");
 }
 
 #pragma mark - CLLocationManager delegate methods
@@ -130,9 +121,6 @@
 - (void)viewDidLoad
 {
     [worldView setShowsUserLocation:YES];
-    
-    // Bronze challenge
-    [worldView setMapType:MKMapTypeSatellite];
 }
 
 - (void)dealloc
