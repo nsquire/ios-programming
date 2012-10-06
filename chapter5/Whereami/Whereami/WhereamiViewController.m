@@ -15,7 +15,30 @@
 
 @implementation WhereamiViewController{}
 
+#pragma mark - Segment event methods
+
+// Silver challenge
+- (IBAction)segmentAction:(id)sender
+{
+    //NSLog(@"segmentAction: selected segment = %d", [sender selectedSegmentIndex]);
+    
+    switch ([sender selectedSegmentIndex]) {
+        case 0:
+            [worldView setMapType:MKMapTypeStandard];
+            break;
+        case 1:
+            [worldView setMapType:MKMapTypeSatellite];
+            break;
+        case 2:
+            [worldView setMapType:MKMapTypeHybrid];
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Initialization methods
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,16 +59,11 @@
         //[locationManager startUpdatingLocation];
         
         // Silver challenge
-        segmentedControl = [[UISegmentedControl alloc] init];
-        [segmentedControl addTarget:self action:@selector(test:) forControlEvents:UIControlEventValueChanged];
+        //segmentedControl = [[UISegmentedControl alloc] init];
+        //[segmentedControl addTarget:self action:@selector(test:) forControlEvents:UIControlEventValueChanged];
     }
     
     return self;
-}
-
-- (void)test
-{
-    NSLog(@"test");
 }
 
 #pragma mark - CLLocationManager delegate methods
@@ -107,8 +125,21 @@
 {
     CLLocationCoordinate2D coord = [loc coordinate];
     
+    // Gold challenge
+    // Setup a date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    // Get the current date
+    NSDate *date = [[NSDate alloc] init];
+    NSString *formattedDateString = [dateFormatter stringFromDate:date];
+    
+    // Set the annotation title string
+    NSString *titleWithDate = [NSString stringWithFormat:@"%@ - added on %@", [locationTitleField text], formattedDateString];
+    
     // Create an instance of BNRMapPoint with the current data
-    BNRMapPoint *mp = [[BNRMapPoint alloc] initWithCoordinate:coord title:[locationTitleField text]];
+    BNRMapPoint *mp = [[BNRMapPoint alloc] initWithCoordinate:coord title:titleWithDate];
     
     // Add it to the map view
     [worldView addAnnotation:mp];
@@ -132,7 +163,7 @@
     [worldView setShowsUserLocation:YES];
     
     // Bronze challenge
-    [worldView setMapType:MKMapTypeSatellite];
+    //[worldView setMapType:MKMapTypeSatellite];
 }
 
 - (void)dealloc
