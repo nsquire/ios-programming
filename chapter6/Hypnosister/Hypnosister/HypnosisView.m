@@ -45,6 +45,16 @@
         // Add path to the context
         CGContextAddArc(ctx, center.x, center.y, currentRadius, 0.0, M_PI * 2.0, YES);
         
+        // Bronze challenge
+        // Switch to a random color before drawing the circle
+        NSArray *arrayOfColors = [NSArray arrayWithObjects:[UIColor redColor],
+                                                           [UIColor blueColor],
+                                                           [UIColor blackColor],
+                                                           [UIColor lightGrayColor],
+                                                           [UIColor greenColor], nil];
+        
+        [[arrayOfColors objectAtIndex:rand() % 5] setStroke];
+        
         // Perform drawing instructions; removes path
         CGContextStrokePath(ctx);
     }
