@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface HypnosisView : UIView
+{
+    CGImageRef image;
+}
 
 @property (nonatomic, strong) UIColor *circleColor;
 

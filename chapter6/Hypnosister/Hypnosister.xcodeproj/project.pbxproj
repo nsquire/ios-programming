@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0193D06D1623E99200033800 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0193D06B1623E99200033800 /* Icon.png */; };
+		0193D06E1623E99200033800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0193D06C1623E99200033800 /* Icon@2x.png */; };
 		01B8C18D1620D6D40016BBBB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8C18C1620D6D40016BBBB /* UIKit.framework */; };
 		01B8C18F1620D6D40016BBBB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8C18E1620D6D40016BBBB /* Foundation.framework */; };
 		01B8C1911620D6D40016BBBB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8C1901620D6D40016BBBB /* CoreGraphics.framework */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0193D06B1623E99200033800 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		0193D06C1623E99200033800 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		01B8C1881620D6D40016BBBB /* Hypnosister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hypnosister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B8C18C1620D6D40016BBBB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01B8C18E1620D6D40016BBBB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +97,8 @@
 		01B8C1931620D6D40016BBBB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0193D06B1623E99200033800 /* Icon.png */,
+				0193D06C1623E99200033800 /* Icon@2x.png */,
 				01B8C1941620D6D40016BBBB /* Hypnosister-Info.plist */,
 				01B8C1951620D6D40016BBBB /* InfoPlist.strings */,
 				01B8C1981620D6D40016BBBB /* main.m */,
@@ -160,6 +166,8 @@
 				01B8C19F1620D6D40016BBBB /* Default.png in Resources */,
 				01B8C1A11620D6D40016BBBB /* Default@2x.png in Resources */,
 				01B8C1A31620D6D40016BBBB /* Default-568h@2x.png in Resources */,
+				0193D06D1623E99200033800 /* Icon.png in Resources */,
+				0193D06E1623E99200033800 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
