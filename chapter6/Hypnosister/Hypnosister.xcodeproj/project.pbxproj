@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0193D06D1623E99200033800 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0193D06B1623E99200033800 /* Icon.png */; };
 		0193D06E1623E99200033800 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0193D06C1623E99200033800 /* Icon@2x.png */; };
+		0193D0761628EAF900033800 /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193D0751628EAF900033800 /* LogoView.m */; };
 		01B8C18D1620D6D40016BBBB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8C18C1620D6D40016BBBB /* UIKit.framework */; };
 		01B8C18F1620D6D40016BBBB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8C18E1620D6D40016BBBB /* Foundation.framework */; };
 		01B8C1911620D6D40016BBBB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8C1901620D6D40016BBBB /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 /* Begin PBXFileReference section */
 		0193D06B1623E99200033800 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0193D06C1623E99200033800 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		0193D0741628EAF900033800 /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoView.h; sourceTree = "<group>"; };
+		0193D0751628EAF900033800 /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoView.m; sourceTree = "<group>"; };
 		01B8C1881620D6D40016BBBB /* Hypnosister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hypnosister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B8C18C1620D6D40016BBBB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01B8C18E1620D6D40016BBBB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,6 +92,8 @@
 				01B8C19C1620D6D40016BBBB /* HypnosisterAppDelegate.m */,
 				01B8C1A91620DD290016BBBB /* HypnosisView.h */,
 				01B8C1AA1620DD290016BBBB /* HypnosisView.m */,
+				0193D0741628EAF900033800 /* LogoView.h */,
+				0193D0751628EAF900033800 /* LogoView.m */,
 				01B8C1931620D6D40016BBBB /* Supporting Files */,
 			);
 			path = Hypnosister;
@@ -181,6 +186,7 @@
 				01B8C1991620D6D40016BBBB /* main.m in Sources */,
 				01B8C19D1620D6D40016BBBB /* HypnosisterAppDelegate.m in Sources */,
 				01B8C1AB1620DD290016BBBB /* HypnosisView.m in Sources */,
+				0193D0761628EAF900033800 /* LogoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

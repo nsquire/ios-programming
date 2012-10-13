@@ -8,6 +8,7 @@
 
 #import "HypnosisterAppDelegate.h"
 #import "HypnosisView.h"
+#import "LogoView.h"
 
 @implementation HypnosisterAppDelegate
 
@@ -39,6 +40,10 @@
     
     // Tell the scrollView how big its virtual world is
     [scrollView setContentSize:bigRect.size];
+    
+    // Add our Logo
+    LogoView *logoView = [[LogoView alloc] initWithFrame:screenRect];
+    [view addSubview:logoView];
     
     // Make the instance of HypnosisView the first responder so that it can respond
     // when the device is shaken
