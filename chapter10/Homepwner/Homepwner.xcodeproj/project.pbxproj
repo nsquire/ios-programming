@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01D1381016423EE100B4C7D8 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1380F16423EE100B4C7D8 /* HeaderView.xib */; };
 		01F117BD163CBCAC0061523C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F117BC163CBCAC0061523C /* UIKit.framework */; };
 		01F117BF163CBCAC0061523C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F117BE163CBCAC0061523C /* Foundation.framework */; };
 		01F117C1163CBCAC0061523C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F117C0163CBCAC0061523C /* CoreGraphics.framework */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01D1380F16423EE100B4C7D8 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		01F117B8163CBCAC0061523C /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F117BC163CBCAC0061523C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01F117BE163CBCAC0061523C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -92,6 +94,7 @@
 				01F117DD163CC43E0061523C /* BNRItem.m */,
 				01F117DE163CC4B30061523C /* BNRItemStore.h */,
 				01F117DF163CC4B30061523C /* BNRItemStore.m */,
+				01D1380F16423EE100B4C7D8 /* HeaderView.xib */,
 				01F117CB163CBCAC0061523C /* HomepwnerAppDelegate.h */,
 				01F117CC163CBCAC0061523C /* HomepwnerAppDelegate.m */,
 				01F117D9163CC2640061523C /* ItemsViewController.h */,
@@ -171,6 +174,7 @@
 				01F117CF163CBCAC0061523C /* Default.png in Resources */,
 				01F117D1163CBCAC0061523C /* Default@2x.png in Resources */,
 				01F117D3163CBCAC0061523C /* Default-568h@2x.png in Resources */,
+				01D1381016423EE100B4C7D8 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +299,7 @@
 				01F117D8163CBCAC0061523C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface BNRItem : NSObject
-{
-}
 
 + (id)randomItem;
 
