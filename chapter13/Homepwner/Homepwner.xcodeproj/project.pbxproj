@@ -13,7 +13,6 @@
 		0161168B16481EED000F773F /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0161168916481EED000F773F /* HeaderView.xib */; };
 		01611697164ABC28000F773F /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01611696164ABC27000F773F /* BNRImageStore.m */; };
 		0161169A164ABEAA000F773F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01611699164ABEAA000F773F /* Default-568h@2x.png */; };
-		016116A0164B2493000F773F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0161169F164B2493000F773F /* CoreGraphics.framework */; };
 		BE4E18E8140D9EB80007F01B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4E18E7140D9EB80007F01B /* UIKit.framework */; };
 		BE4E18EA140D9EB80007F01B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4E18E9140D9EB80007F01B /* Foundation.framework */; };
 		BE4E18F0140D9EB80007F01B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4E18EE140D9EB80007F01B /* InfoPlist.strings */; };
@@ -33,7 +32,6 @@
 		01611695164ABC27000F773F /* BNRImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
 		01611696164ABC27000F773F /* BNRImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
 		01611699164ABEAA000F773F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		0161169F164B2493000F773F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BE4E18E3140D9EB80007F01B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4E18E7140D9EB80007F01B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE4E18E9140D9EB80007F01B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,7 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016116A0164B2493000F773F /* CoreGraphics.framework in Frameworks */,
 				BE4E18E8140D9EB80007F01B /* UIKit.framework in Frameworks */,
 				BE4E18EA140D9EB80007F01B /* Foundation.framework in Frameworks */,
 			);
@@ -66,7 +63,6 @@
 		BE4E18D8140D9EB80007F01B = {
 			isa = PBXGroup;
 			children = (
-				0161169F164B2493000F773F /* CoreGraphics.framework */,
 				BE4E18EB140D9EB80007F01B /* Homepwner */,
 				BE4E18E6140D9EB80007F01B /* Frameworks */,
 				BE4E18E4140D9EB80007F01B /* Products */,

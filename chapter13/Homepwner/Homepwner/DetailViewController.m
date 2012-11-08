@@ -87,7 +87,6 @@
     // If our phone has a camera, we want to take a picture, otherwise, we just pick from photo library
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [imagePicker setCameraOverlayView:[self crosshairOverlay]];
     } else {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
@@ -150,34 +149,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [imageView setImage:nil];
 }
 
-- (UIView *)crosshairOverlay
-{
-    CGRect screenRect = [[self view] bounds];
-    UIView *view = [[UIView alloc] initWithFrame:screenRect];
-    //[view setDelegate:self];
-    
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGRect bounds = [[self view] bounds];
-    
-    CGPoint center;
-    center.x = bounds.origin.x + bounds.size.width / 2.0;
-    center.y = bounds.origin.y + bounds.size.height / 2.0;
-    CGContextSetLineWidth(ctx, 1.0);
-    [[UIColor greenColor] setStroke];
-    
-    // Draw the crosshairs
-    CGContextMoveToPoint(ctx, center.x - 15.0, center.y);
-    CGContextAddLineToPoint(ctx, center.x + 15.0, center.y);
-    
-    CGContextMoveToPoint(ctx, center.x, center.y - 15.0);
-    CGContextAddLineToPoint(ctx, center.x, center.y + 15.0);
-    
-    CGContextStrokePath(ctx);
-    
-    return view;
-    
-}
-
 #pragma mark - Text field delegate methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -192,9 +163,5 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [[self view] endEditing:YES];
 }
-
-#pragma mark - Overlay methods
-
-
 
 @end
