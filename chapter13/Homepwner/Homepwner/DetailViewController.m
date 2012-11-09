@@ -82,8 +82,6 @@
 {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     
-    [imagePicker setAllowsEditing:YES];
-    
     // If our phone has a camera, we want to take a picture, otherwise, we just pick from photo library
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
@@ -109,7 +107,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     }
     
     // Get picked image from info dictionary
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     // Create a CFUUID object - it knows how to create unique identifier strings
     CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
@@ -133,20 +131,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     // Take image picker off the screen -
     // you must call this dismiss method
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)clearImage:(id)sender
-{
-    // Delete the item image
-    NSString *key = [item imageKey];
-    [[BNRImageStore sharedStore] deleteImageForKey:key];
-    
-    // Remove the item's imageKey
-    [item setImageKey:nil];
-    
-    
-    // Remove the image from the screen
-    [imageView setImage:nil];
 }
 
 #pragma mark - Text field delegate methods

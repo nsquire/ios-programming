@@ -23,6 +23,5 @@
 
 - (IBAction)takePicture:(id)sender;
 - (IBAction)backgroundTapped:(id)sender;
-- (IBAction)clearImage:(id)sender;
 
 @end
