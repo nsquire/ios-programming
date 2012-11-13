@@ -9,9 +9,34 @@
 #import "DetailViewController.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
+#import "BNRItemStore.h"
+#import "ImagePickerPopoverBackgroundView.h"
 
 @implementation DetailViewController
-@synthesize item;
+
+@synthesize item, dismissBlock;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    @throw [NSException exceptionWithName:@"Wrong initializer"
+                                   reason:@"User initForNewItem:"
+                                 userInfo:nil];
+}
+
+- (id)initForNewItem:(BOOL)isNew
+{
+    self = [super initWithNibName:@"DetailViewController" bundle:nil];
+    
+    if (self && isNew) {
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+        
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+        [[self navigationItem] setLeftBarButtonItem:cancelButton];
+    }
+    
+    return self;
+}
 
 - (void)setItem:(BNRItem *)i
 {
@@ -54,7 +79,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    
+    UIColor *clr = nil;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clr = [UIColor colorWithRed:0.875 green:0.88 blue:0.91 alpha:1];
+    } else {
+        //clr = [UIColor groupTableViewBackgroundColor]; doesn't work on iPhone 5 simulator
+        clr = [UIColor colorWithRed:0.875 green:0.88 blue:0.91 alpha:1];
+    }
+    
+    [[self view] setBackgroundColor:clr];
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -65,11 +100,11 @@
 
 - (IBAction)takePicture:(id)sender 
 {
-    NSString *oldKey = [item imageKey];
-    // Did the item already have an image?
-    if (oldKey) {
-        // Delete the old image
-        [[BNRImageStore defaultImageStore] deleteImageForKey:oldKey];
+    if ([imagePickerPopover isPopoverVisible]) {
+        // If the popover is up already, get rid of it
+        [imagePickerPopover dismissPopoverAnimated:YES];
+        imagePickerPopover = nil;
+        return;
     }
     
     UIImagePickerController *imagePicker =
@@ -87,7 +122,26 @@
     [imagePicker setDelegate:self];
 
     // Place image picker on the screen
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    //[self presentViewController:imagePicker animated:YES completion:nil];
+    // Check for iPad device before instantiating the popover controller
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+         // Create a new popover controller that will display the imagePicker
+        imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        [imagePickerPopover setDelegate:self];
+        [imagePickerPopover setPopoverBackgroundViewClass:[ImagePickerPopoverBackgroundView class]];
+        
+        // Display the popover controller; sender
+        // is the camera bar button item
+        [imagePickerPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    NSLog(@"User dismissed popover");
+    imagePickerPopover = nil;
 }
 
 - (IBAction)backgroundTapped:(id)sender 
@@ -111,6 +165,13 @@
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    NSString *oldKey = [item imageKey];
+    // Did the item already have an image?
+    if (oldKey) {
+        // Delete the old image
+        [[BNRImageStore defaultImageStore] deleteImageForKey:oldKey];
+    }
+    
     // Get picked image from info dictionary
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
 
@@ -138,7 +199,35 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
     // Take image picker off the screen -
     // you must call this dismiss method
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [imagePickerPopover dismissPopoverAnimated:YES];
+        imagePickerPopover = nil;
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+// Doesn't work on iPhone 5 simulator
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+    }
+}
+
+- (void)save:(id)sender
+{
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissBlock];
+}
+
+- (void)cancel:(id)sender
+{
+    // If the user cancelled, then remove the item from the item store
+    [[BNRItemStore defaultStore] removeItem:item];
+    
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissBlock];
 }
 
 @end

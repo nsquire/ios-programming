@@ -34,20 +34,31 @@
     }
     return self;
 }
+
 - (IBAction)addNewItem:(id)sender
 {
     // Create a new BNRItem and add it to the store
     BNRItem *newItem = [[BNRItemStore defaultStore] createItem];
 
-    // Figure out where that item is in the array 
-    int lastRow = [[[BNRItemStore defaultStore] allItems] indexOfObject:newItem];
-        
-    NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initForNewItem:YES];
+    [detailViewController setItem:newItem];
+    
+    [detailViewController setDismissBlock:^{
+        [[self tableView] reloadData];
+    }];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    
+    if ([navController modalPresentationStyle] == UIModalPresentationFullScreen) {
+        [navController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+    } else {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    }
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
 
-    // Insert this new row into the table.
-    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip]
-                            withRowAnimation:UITableViewRowAnimationTop];
-}  
 - (id)initWithStyle:(UITableViewStyle)style
 {
     return [self init];
@@ -71,7 +82,7 @@
 - (void)tableView:(UITableView *)aTableView 
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initForNewItem:NO];
     
     NSArray *items = [[BNRItemStore defaultStore] allItems];
     BNRItem *selectedItem = [items objectAtIndex:[indexPath row]];
