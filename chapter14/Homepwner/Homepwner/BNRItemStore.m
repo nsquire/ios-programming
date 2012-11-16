@@ -13,7 +13,7 @@
 
 @implementation BNRItemStore
 
-+ (BNRItemStore *)defaultStore
++ (BNRItemStore *)sharedStore
 {
     static BNRItemStore *defaultStore = nil;
     if(!defaultStore)
@@ -24,7 +24,7 @@
 
 + (id)allocWithZone:(NSZone *)zone
 {
-    return [self defaultStore];
+    return [self sharedStore];
 }
 
 - (id)init 
