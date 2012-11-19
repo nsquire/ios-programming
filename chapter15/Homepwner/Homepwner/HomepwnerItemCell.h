@@ -7,16 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseItemCell.h"
 
-@interface HomepwnerItemCell : UITableViewCell
+@interface HomepwnerItemCell : BaseItemCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
-
-@property (weak, nonatomic) id controller;
-@property (weak, nonatomic) UITableView *tableView;
 
 - (IBAction)showImage:(id)sender;
 

@@ -36,24 +36,27 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIScrollView" id="431402870">
+					<object class="IBUIScrollView" id="477112134">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIImageView" id="947647380">
-								<reference key="NSNextResponder" ref="431402870"/>
+							<object class="IBUIImageView" id="905444443">
+								<reference key="NSNextResponder" ref="477112134"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 548}</string>
-								<reference key="NSSuperview" ref="431402870"/>
+								<string key="NSFrame">{{20, 20}, {320, 548}}</string>
+								<reference key="NSSuperview" ref="477112134"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUIContentMode">3</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 548}</string>
+						<string key="NSFrame">{{-20, -20}, {340, 568}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="905444443"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -63,6 +66,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="477112134"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -105,7 +109,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">scrollView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="431402870"/>
+						<reference key="destination" ref="477112134"/>
 					</object>
 					<int key="connectionID">21</int>
 				</object>
@@ -113,7 +117,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="947647380"/>
+						<reference key="destination" ref="905444443"/>
 					</object>
 					<int key="connectionID">22</int>
 				</object>
@@ -130,7 +134,7 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="431402870"/>
+							<reference ref="477112134"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -147,16 +151,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
-						<reference key="object" ref="431402870"/>
+						<reference key="object" ref="477112134"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="947647380"/>
+							<reference ref="905444443"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
-						<reference key="object" ref="947647380"/>
-						<reference key="parent" ref="431402870"/>
+						<reference key="object" ref="905444443"/>
+						<reference key="parent" ref="477112134"/>
 					</object>
 				</array>
 			</object>

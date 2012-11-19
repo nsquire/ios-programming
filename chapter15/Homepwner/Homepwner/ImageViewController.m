@@ -16,31 +16,52 @@
 
 @synthesize image;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)viewDidLoad
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    NSLog(@"In: %@", NSStringFromSelector(_cmd));
+    [super viewDidLoad];
     
-    if (self) {
-        // Custom initialization
-    }
-    
-    return self;
+    [scrollView setMinimumZoomScale:0.5];
+    [scrollView setMaximumZoomScale:6.0];
+    [scrollView setDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"In: %@", NSStringFromSelector(_cmd));
+    
     [super viewWillAppear:animated];
     
     CGSize sz = [[self image] size];
+    
+    NSLog(@"size: %f, %f", sz.width, sz.height);
+    
     [scrollView setContentSize:sz];
-    [imageView setFrame:CGRectMake(0, 0, sz.width, sz.height)];
+    
+    // Center image in frame
+    [imageView setFrame:CGRectMake(([[self view] bounds].size.width / 2) - (sz.width / 2),
+                                   ([[self view] bounds].size.height / 2) - (sz.height / 2),
+                                   sz.width,
+                                   sz.height)];
+    
     [imageView setImage:[self image]];
 }
 
-- (void)didReceiveMemoryWarning
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return imageView;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)sv withView:(UIView *)view atScale:(float)scale
+{
+    CGSize sz = [view bounds].size;
+    
+    sz.width *= scale;
+    sz.height *= scale;
+    
+    NSLog(@"size: %f, %f scale: %f", sz.width, sz.height, scale);
+    
+    [sv setContentSize:sz];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 #import "HomepwnerItemCell.h"
+#import "HomepwnerStepperItemCell.h"
 #import "ImageViewController.h"
 
 @implementation ItemsViewController
@@ -159,6 +160,16 @@
     [[cell valueLabel] setText:[NSString stringWithFormat:@"$%d", [p valueInDollars]]];
     [[cell thumbnailView] setImage:[p thumbnail]];
     
+    // For stepper cell
+    //[[cell valueStepper] setValue:[p valueInDollars]];
+    
+    if ([p valueInDollars] > 50) {
+        [[cell valueLabel] setTextColor:[UIColor greenColor]];
+    } else {
+        [[cell valueLabel] setTextColor:[UIColor redColor]];
+    }
+     
+    
     return cell;
 }
 
@@ -202,6 +213,17 @@
 {
     [imagePopover dismissPopoverAnimated:YES];
     imagePopover = nil;
+}
+
+- (void)changeValue:(id)sender atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"In: %@", NSStringFromSelector(_cmd));
+    
+    UIStepper *step = sender;
+    BNRItem *i = [[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
+    [i setValueInDollars:[step value]];
+    
+    [[self tableView] reloadData];
 }
 
 @end

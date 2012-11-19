@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageViewController : UIViewController
+@interface ImageViewController : UIViewController <UIScrollViewDelegate>
 {
     __weak IBOutlet UIScrollView *scrollView;
     __weak IBOutlet UIImageView *imageView;
