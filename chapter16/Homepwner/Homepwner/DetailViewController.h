@@ -10,6 +10,7 @@
     __weak IBOutlet UITextField *valueField;
     __weak IBOutlet UILabel *dateLabel;
     __weak IBOutlet UIImageView *imageView;
+    __weak IBOutlet UIButton *assetTypeButton;
 
     UIPopoverController *imagePickerPopover;
 }
@@ -22,5 +23,6 @@
 
 - (IBAction)takePicture:(id)sender;
 - (IBAction)backgroundTapped:(id)sender;
+- (IBAction)showAssetTypePicker:(id)sender;
 
 @end

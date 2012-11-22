@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
+#import "AssetTypePicker.h"
 
 @implementation DetailViewController
 @synthesize item;
@@ -78,9 +79,12 @@
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 
+    // Convert time interval to NSDate
+    NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:[item dateCreated]];
+    
     // Use filtered NSDate object to set dateLabel contents
-    [dateLabel setText:[dateFormatter stringFromDate:[item dateCreated]]];
-
+    [dateLabel setText:[dateFormatter stringFromDate:date]];
+    
     // Change the navigation item to display name of item
     [[self navigationItem] setTitle:[item itemName]];
 
@@ -95,7 +99,16 @@
         // Clear the imageView
         [imageView setImage:nil];
     }
+    
+    NSString *typeLabel = [[item assetType] valueForKey:@"label"];
+    
+    if (!typeLabel) {
+        typeLabel = @"None";
+    }
+    
+    [assetTypeButton setTitle:[NSString stringWithFormat:@"Type: %@", typeLabel] forState:UIControlStateNormal];
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -104,6 +117,7 @@
         return (io == UIInterfaceOrientationPortrait);
     } 
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -193,6 +207,16 @@
 {
     [[self view] endEditing:YES];
     NSLog(@"%@", [self presentingViewController]);
+}
+
+- (IBAction)showAssetTypePicker:(id)sender
+{
+    [[self view] endEditing:YES];
+    
+    AssetTypePicker *assetTypePicker = [[AssetTypePicker alloc] init];
+    [assetTypePicker setItem:item];
+    
+    [[self navigationController] pushViewController:assetTypePicker animated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker
