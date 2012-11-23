@@ -86,8 +86,7 @@
     [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
     [self presentViewController:navController animated:YES completion:nil];
-}
-
+}  
 - (id)initWithStyle:(UITableViewStyle)style
 {
     return [self init];
@@ -190,6 +189,7 @@
         
         // Present a 600x600 popover from the rect
         imagePopover = [[UIPopoverController alloc] initWithContentViewController:ivc];
+        
         [imagePopover setDelegate:self];
         [imagePopover setPopoverContentSize:CGSizeMake(600, 600)];
         [imagePopover presentPopoverFromRect:rect inView:[self view]

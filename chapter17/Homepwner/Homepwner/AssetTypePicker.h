@@ -10,9 +10,8 @@
 
 @class BNRItem;
 
-@interface AssetTypePicker : UITableViewController <UITableViewDataSource>
+@interface AssetTypePicker : UITableViewController
 
 @property (nonatomic, strong) BNRItem *item;
-@property (nonatomic, strong) UIPopoverController *popoverController;
 
 @end

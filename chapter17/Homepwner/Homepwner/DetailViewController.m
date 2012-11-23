@@ -123,13 +123,11 @@
     [super viewDidLoad];
 
     UIColor *clr = nil;  
-    
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         clr = [UIColor colorWithRed:0.875 green:0.88 blue:0.91 alpha:1];
     } else {
         clr = [UIColor groupTableViewBackgroundColor];
     }
-    
     [[self view] setBackgroundColor:clr];
 }
 
@@ -203,34 +201,22 @@
 {
     NSLog(@"User dismissed popover");
     imagePickerPopover = nil;
-    assetPickerPopover = nil;
 }
 
 - (IBAction)backgroundTapped:(id)sender 
 {
-    NSLog(@"%@", [self presentingViewController]);
     [[self view] endEditing:YES];
+    NSLog(@"%@", [self presentingViewController]);
 }
 
 - (IBAction)showAssetTypePicker:(id)sender
 {
-    NSLog(@"In: %@", NSStringFromSelector(_cmd));
-    
     [[self view] endEditing:YES];
     
     AssetTypePicker *assetTypePicker = [[AssetTypePicker alloc] init];
     [assetTypePicker setItem:item];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        assetPickerPopover = [[UIPopoverController alloc] initWithContentViewController:assetTypePicker];
-        [assetTypePicker setPopoverController:assetPickerPopover];
-        [assetPickerPopover setDelegate:self];
-        CGRect rect = [[self view] convertRect:[sender bounds] fromView:sender];
-        [assetPickerPopover setPopoverContentSize:CGSizeMake(300.0, 150.0)];
-        [assetPickerPopover presentPopoverFromRect:rect inView:[self view] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    } else {
-        [[self navigationController] pushViewController:assetTypePicker animated:YES];
-    }
+    [[self navigationController] pushViewController:assetTypePicker animated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker

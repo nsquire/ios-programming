@@ -219,25 +219,4 @@
     return allAssetTypes;
 }
 
-- (void)addAssetType:(NSString *)typeName
-{
-    NSManagedObject *type;
-    type = [NSEntityDescription insertNewObjectForEntityForName:@"BNRAssetType"
-                                         inManagedObjectContext:context];
-    [type setValue:typeName forKey:@"label"];
-    [allAssetTypes addObject:type];
-}
-
-- (NSArray *)itemsForAssetType:(NSString *)assetType
-{
-    NSLog(@"In : %@%@", NSStringFromSelector(_cmd), assetType);
-    
-    NSPredicate *p = [NSPredicate predicateWithFormat:@"assetType.label == %@", assetType];
-    NSArray *items = [allItems filteredArrayUsingPredicate:p];
-    
-    NSLog(@"Found items: %i", [items count]);
-    
-    return items;
-}
-
 @end

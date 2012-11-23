@@ -29,7 +29,5 @@
 - (NSString *)itemArchivePath;
 - (BOOL)saveChanges;
 - (NSArray *)allAssetTypes;
-- (void)addAssetType:(NSString *)typeName;
-- (NSArray *)itemsForAssetType:(NSString *)assetType;
 
 @end
