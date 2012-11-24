@@ -48,9 +48,6 @@
 		018D1BAA165BE6BD004B6379 /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		018D1BAC165DB42D004B6379 /* AssetTypePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetTypePicker.h; sourceTree = "<group>"; };
 		018D1BAD165DB42D004B6379 /* AssetTypePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetTypePicker.m; sourceTree = "<group>"; };
-		01E08E7B166138040085DE3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/DetailViewController.xib; sourceTree = "<group>"; };
-		01E08E7C166138040085DE3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
-		01E08E7D166138040085DE3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE0B750114191AEE00118DD7 /* BNRImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
 		BE0B750214191AEE00118DD7 /* BNRImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
 		BE4E18E3140D9EB80007F01B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,7 +186,6 @@
 			knownRegions = (
 				en,
 				es,
-				pt,
 			);
 			mainGroup = BE4E18D8140D9EB80007F01B;
 			productRefGroup = BE4E18E4140D9EB80007F01B /* Products */;
@@ -244,7 +240,6 @@
 			children = (
 				014B188A16605782003B23A7 /* en */,
 				014B188C16605D6D003B23A7 /* es */,
-				01E08E7B166138040085DE3E /* pt */,
 			);
 			name = DetailViewController.xib;
 			sourceTree = "<group>";
@@ -254,7 +249,6 @@
 			children = (
 				014B189116612922003B23A7 /* en */,
 				014B18931661292A003B23A7 /* es */,
-				01E08E7C166138040085DE3E /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -264,7 +258,6 @@
 			children = (
 				BE4E18EF140D9EB80007F01B /* en */,
 				014B188D16605D6D003B23A7 /* es */,
-				01E08E7D166138040085DE3E /* pt */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

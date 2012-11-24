@@ -43,7 +43,7 @@
 					<object class="IBUILabel" id="672966113">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 21}, {62, 21}}</string>
+						<string key="NSFrame">{{20, 20}, {46, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="775628684"/>
@@ -53,7 +53,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Nombre</string>
+						<string key="IBUIText">Name</string>
 						<object class="NSColor" key="IBUITextColor" id="857245439">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -75,7 +75,7 @@
 					<object class="IBUILabel" id="376226135">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 60}, {128, 21}}</string>
+						<string key="NSFrame">{{20, 61}, {44, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="179305092"/>
@@ -85,7 +85,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Numéro de serie</string>
+						<string key="IBUIText">Serial</string>
 						<reference key="IBUITextColor" ref="857245439"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -96,7 +96,7 @@
 					<object class="IBUILabel" id="740871770">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{104, 101}, {44, 21}}</string>
+						<string key="NSFrame">{{20, 97}, {44, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="417778071"/>
@@ -106,7 +106,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Valor</string>
+						<string key="IBUIText">Value</string>
 						<reference key="IBUITextColor" ref="857245439"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -139,7 +139,7 @@
 					<object class="IBUITextField" id="775628684">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{90, 16}, {210, 31}}</string>
+						<string key="NSFrame">{{70, 16}, {230, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="376226135"/>
@@ -175,7 +175,7 @@
 					<object class="IBUITextField" id="179305092">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{156, 55}, {144, 31}}</string>
+						<string key="NSFrame">{{70, 57}, {112, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="740871770"/>
@@ -202,7 +202,7 @@
 					<object class="IBUITextField" id="417778071">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{156, 97}, {144, 31}}</string>
+						<string key="NSFrame">{{70, 97}, {112, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="746897173"/>
@@ -419,16 +419,16 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="672966113"/>
+							<reference ref="376226135"/>
+							<reference ref="740871770"/>
 							<reference ref="746897173"/>
 							<reference ref="775628684"/>
+							<reference ref="179305092"/>
+							<reference ref="417778071"/>
 							<reference ref="622665566"/>
 							<reference ref="247481833"/>
 							<reference ref="731062142"/>
-							<reference ref="376226135"/>
-							<reference ref="672966113"/>
-							<reference ref="740871770"/>
-							<reference ref="179305092"/>
-							<reference ref="417778071"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
