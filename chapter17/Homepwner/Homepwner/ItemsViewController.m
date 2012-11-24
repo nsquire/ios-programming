@@ -19,10 +19,11 @@
 {
     // Call the superclass's designated initializer
     self = [super initWithStyle:UITableViewStyleGrouped];
+    
     if (self) {
         UINavigationItem *n = [self navigationItem];
         
-        [n setTitle:@"Homepwner"];
+        [n setTitle:NSLocalizedString(@"Homepwner", @"Name of application")];
 
         // Create a new bar button item that will send
         // addNewItem: to ItemsViewController
@@ -36,8 +37,10 @@
 
         [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];        
     }
+    
     return self;
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -86,7 +89,8 @@
     [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
     [self presentViewController:navController animated:YES completion:nil];
-}  
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     return [self init];
@@ -156,7 +160,12 @@
     // Configure the cell with the BNRItem
     [[cell nameLabel] setText:[p itemName]];
     [[cell serialNumberLabel] setText:[p serialNumber]];
-    [[cell valueLabel] setText:[NSString stringWithFormat:@"$%d", [p valueInDollars]]];
+    
+    NSLocale *currencySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
+    [[cell valueLabel] setText:[NSString stringWithFormat:@"%@%d",
+                                                          currencySymbol,
+                                                          [p valueInDollars]]];
+    
     [[cell thumbnailView] setImage:[p thumbnail]];
     
     return cell;

@@ -10,6 +10,8 @@
 		0138E89B1656A40800F1468A /* HomepwnerItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0138E89A1656A40800F1468A /* HomepwnerItemCell.m */; };
 		0138E8A11656A45C00F1468A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0138E89F1656A45C00F1468A /* Default-568h@2x.png */; };
 		0138E8A71656A5AF00F1468A /* HomepwnerItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0138E8A61656A5AF00F1468A /* HomepwnerItemCell.xib */; };
+		014B188916605782003B23A7 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014B188B16605782003B23A7 /* DetailViewController.xib */; };
+		014B189016612922003B23A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 014B189216612922003B23A7 /* Localizable.strings */; };
 		018D1B9116586B9C004B6379 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018D1B8F16586B9C004B6379 /* ImageViewController.m */; };
 		018D1B9216586B9C004B6379 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018D1B9016586B9C004B6379 /* ImageViewController.xib */; };
 		018D1BA1165BD866004B6379 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018D1BA0165BD866004B6379 /* CoreData.framework */; };
@@ -25,7 +27,6 @@
 		BE4E18FE140D9EE70007F01B /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4E18FD140D9EE70007F01B /* ItemsViewController.m */; };
 		BE4E1904140DA6EC0007F01B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4E1903140DA6EC0007F01B /* BNRItemStore.m */; };
 		BE58F4A5141011C300C6D116 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE58F4A3141011C300C6D116 /* DetailViewController.m */; };
-		BE58F4A6141011C300C6D116 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE58F4A4141011C300C6D116 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,11 @@
 		0138E89A1656A40800F1468A /* HomepwnerItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepwnerItemCell.m; sourceTree = "<group>"; };
 		0138E89F1656A45C00F1468A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0138E8A61656A5AF00F1468A /* HomepwnerItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepwnerItemCell.xib; sourceTree = "<group>"; };
+		014B188A16605782003B23A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		014B188C16605D6D003B23A7 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		014B188D16605D6D003B23A7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		014B189116612922003B23A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		014B18931661292A003B23A7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		018D1B8E16586B9C004B6379 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		018D1B8F16586B9C004B6379 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		018D1B9016586B9C004B6379 /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
@@ -59,7 +65,6 @@
 		BE4E1903140DA6EC0007F01B /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
 		BE58F4A2141011C300C6D116 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		BE58F4A3141011C300C6D116 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		BE58F4A4141011C300C6D116 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +121,7 @@
 				BE4E1903140DA6EC0007F01B /* BNRItemStore.m */,
 				BE58F4A2141011C300C6D116 /* DetailViewController.h */,
 				BE58F4A3141011C300C6D116 /* DetailViewController.m */,
-				BE58F4A4141011C300C6D116 /* DetailViewController.xib */,
+				014B188B16605782003B23A7 /* DetailViewController.xib */,
 				018D1BA3165BD9D4004B6379 /* Homepwner.xcdatamodeld */,
 				BE4E18F4140D9EB80007F01B /* HomepwnerAppDelegate.h */,
 				BE4E18F5140D9EB80007F01B /* HomepwnerAppDelegate.m */,
@@ -128,6 +133,7 @@
 				018D1B9016586B9C004B6379 /* ImageViewController.xib */,
 				BE4E18FC140D9EE70007F01B /* ItemsViewController.h */,
 				BE4E18FD140D9EE70007F01B /* ItemsViewController.m */,
+				014B189216612922003B23A7 /* Localizable.strings */,
 				BE4E18EC140D9EB80007F01B /* Supporting Files */,
 			);
 			path = Homepwner;
@@ -179,6 +185,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 			);
 			mainGroup = BE4E18D8140D9EB80007F01B;
 			productRefGroup = BE4E18E4140D9EB80007F01B /* Products */;
@@ -196,10 +203,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4E18F0140D9EB80007F01B /* InfoPlist.strings in Resources */,
-				BE58F4A6141011C300C6D116 /* DetailViewController.xib in Resources */,
+				014B188916605782003B23A7 /* DetailViewController.xib in Resources */,
 				0138E8A11656A45C00F1468A /* Default-568h@2x.png in Resources */,
 				0138E8A71656A5AF00F1468A /* HomepwnerItemCell.xib in Resources */,
 				018D1B9216586B9C004B6379 /* ImageViewController.xib in Resources */,
+				014B189016612922003B23A7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,10 +235,29 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		014B188B16605782003B23A7 /* DetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				014B188A16605782003B23A7 /* en */,
+				014B188C16605D6D003B23A7 /* es */,
+			);
+			name = DetailViewController.xib;
+			sourceTree = "<group>";
+		};
+		014B189216612922003B23A7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				014B189116612922003B23A7 /* en */,
+				014B18931661292A003B23A7 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		BE4E18EE140D9EB80007F01B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BE4E18EF140D9EB80007F01B /* en */,
+				014B188D16605D6D003B23A7 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
