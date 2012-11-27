@@ -1,38 +1,28 @@
 //
-//  HomepwnerAppDelegate.m
-//  Homepwner
+//  WhereamiAppDelegate.m
+//  Whereami
 //
-//  Created by joeconway on 8/30/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by joeconway on 7/31/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "HomepwnerAppDelegate.h"
-#import "ItemsViewController.h"
-#import "BNRItemStore.h"
+#import "WhereamiAppDelegate.h"
+#import "WhereamiViewController.h"
 
-@implementation HomepwnerAppDelegate
+@implementation WhereamiAppDelegate
 
 @synthesize window = _window;
+@synthesize viewController = _viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    
-    // Create a ItemsViewController
-    ItemsViewController *itemsViewController = [[ItemsViewController alloc] init];
-    
-    // Create an instance of a UINavigationController
-    // its stack contains only itemsViewController
-    UINavigationController *navController = [[UINavigationController alloc]
-            initWithRootViewController:itemsViewController];
-            
-    // Place navigation controller's view in the window hierarchy
-    [[self window] setRootViewController:navController];
-
-
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.viewController = [[WhereamiViewController alloc] initWithNibName:@"WhereamiViewController" bundle:nil]; 
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -51,13 +41,8 @@
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     
-    BOOL success = [[BNRItemStore sharedStore] saveChanges];
+    // Save preferred location
     
-    if (success) {
-        NSLog(@"Saved all of the BNRITems");
-    } else {
-        NSLog(@"Could not save any of the BNRItems");
-    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
