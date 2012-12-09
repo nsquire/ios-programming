@@ -11,20 +11,10 @@
 @interface TouchDrawView : UIView
 {
     NSMutableDictionary *linesInProcess;
-    NSMutableDictionary *circlesInProcess;
     NSMutableArray *completeLines;
-    NSMutableArray *completeCircles;
-    
-    NSManagedObjectContext *objectContext;
-    NSManagedObjectModel *model;
 }
-
-+ (CGFloat)angleBetweenPoint:(CGPoint) firstPoint andSecondPoint:(CGPoint) secondPoint;
 
 - (void)clearAll;
 - (void)endTouches:(NSSet *)touches;
-
-- (NSString *)itemArchivePath;
-- (BOOL)saveChanges;
 
 @end

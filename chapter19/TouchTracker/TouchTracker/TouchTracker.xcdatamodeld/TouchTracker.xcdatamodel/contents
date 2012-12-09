@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C3006" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Line" representedClassName="Line" syncable="YES">
+        <attribute name="begin" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Line" positionX="0" positionY="0" width="128" height="88"/>
+    </elements>
+</model>

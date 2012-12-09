@@ -16,12 +16,9 @@
 		01780FFE1666666A009EE8F1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 01780FFD1666666A009EE8F1 /* Default.png */; };
 		017810001666666A009EE8F1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01780FFF1666666A009EE8F1 /* Default@2x.png */; };
 		017810021666666B009EE8F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017810011666666B009EE8F1 /* Default-568h@2x.png */; };
+		0178100A16666690009EE8F1 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178100916666690009EE8F1 /* Line.m */; };
 		0178100D166666FB009EE8F1 /* TouchDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178100C166666FB009EE8F1 /* TouchDrawView.m */; };
 		01781010166669AE009EE8F1 /* TouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0178100F166669AE009EE8F1 /* TouchViewController.m */; };
-		0196C20F1674614100DE9EC5 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196C20E1674614100DE9EC5 /* Circle.m */; };
-		01AF93FB166A8D0600130A9D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01AF93FA166A8D0600130A9D /* CoreData.framework */; };
-		01AF9402166ADBE500130A9D /* TouchTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01AF9400166ADBE500130A9D /* TouchTracker.xcdatamodeld */; };
-		01AF941C1673D5A200130A9D /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AF941B1673D5A200130A9D /* Line.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,16 +35,12 @@
 		01780FFD1666666A009EE8F1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		01780FFF1666666A009EE8F1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		017810011666666B009EE8F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0178100816666690009EE8F1 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		0178100916666690009EE8F1 /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		0178100B166666FB009EE8F1 /* TouchDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchDrawView.h; sourceTree = "<group>"; };
 		0178100C166666FB009EE8F1 /* TouchDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchDrawView.m; sourceTree = "<group>"; };
 		0178100E166669AE009EE8F1 /* TouchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchViewController.h; sourceTree = "<group>"; };
 		0178100F166669AE009EE8F1 /* TouchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchViewController.m; sourceTree = "<group>"; };
-		0196C20D1674614100DE9EC5 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
-		0196C20E1674614100DE9EC5 /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
-		01AF93FA166A8D0600130A9D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		01AF9401166ADBE500130A9D /* TouchTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TouchTracker.xcdatamodel; sourceTree = "<group>"; };
-		01AF941A1673D5A200130A9D /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		01AF941B1673D5A200130A9D /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01AF93FB166A8D0600130A9D /* CoreData.framework in Frameworks */,
 				01780FEC1666666A009EE8F1 /* UIKit.framework in Frameworks */,
 				01780FEE1666666A009EE8F1 /* Foundation.framework in Frameworks */,
 				01780FF01666666A009EE8F1 /* CoreGraphics.framework in Frameworks */,
@@ -85,10 +77,9 @@
 		01780FEA1666666A009EE8F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01AF93FA166A8D0600130A9D /* CoreData.framework */,
-				01780FEF1666666A009EE8F1 /* CoreGraphics.framework */,
-				01780FED1666666A009EE8F1 /* Foundation.framework */,
 				01780FEB1666666A009EE8F1 /* UIKit.framework */,
+				01780FED1666666A009EE8F1 /* Foundation.framework */,
+				01780FEF1666666A009EE8F1 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,13 +89,10 @@
 			children = (
 				01780FFA1666666A009EE8F1 /* AppDelegate.h */,
 				01780FFB1666666A009EE8F1 /* AppDelegate.m */,
-				0196C20D1674614100DE9EC5 /* Circle.h */,
-				0196C20E1674614100DE9EC5 /* Circle.m */,
-				01AF941A1673D5A200130A9D /* Line.h */,
-				01AF941B1673D5A200130A9D /* Line.m */,
+				0178100816666690009EE8F1 /* Line.h */,
+				0178100916666690009EE8F1 /* Line.m */,
 				0178100B166666FB009EE8F1 /* TouchDrawView.h */,
 				0178100C166666FB009EE8F1 /* TouchDrawView.m */,
-				01AF9400166ADBE500130A9D /* TouchTracker.xcdatamodeld */,
 				0178100E166669AE009EE8F1 /* TouchViewController.h */,
 				0178100F166669AE009EE8F1 /* TouchViewController.m */,
 				01780FF21666666A009EE8F1 /* Supporting Files */,
@@ -193,11 +181,9 @@
 			files = (
 				01780FF81666666A009EE8F1 /* main.m in Sources */,
 				01780FFC1666666A009EE8F1 /* AppDelegate.m in Sources */,
+				0178100A16666690009EE8F1 /* Line.m in Sources */,
 				0178100D166666FB009EE8F1 /* TouchDrawView.m in Sources */,
 				01781010166669AE009EE8F1 /* TouchViewController.m in Sources */,
-				01AF9402166ADBE500130A9D /* TouchTracker.xcdatamodeld in Sources */,
-				01AF941C1673D5A200130A9D /* Line.m in Sources */,
-				0196C20F1674614100DE9EC5 /* Circle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,22 +292,8 @@
 				017810071666666B009EE8F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		01AF9400166ADBE500130A9D /* TouchTracker.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				01AF9401166ADBE500130A9D /* TouchTracker.xcdatamodel */,
-			);
-			currentVersion = 01AF9401166ADBE500130A9D /* TouchTracker.xcdatamodel */;
-			path = TouchTracker.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 01780FDE1666666A009EE8F1 /* Project object */;
 }
