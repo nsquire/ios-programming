@@ -11,6 +11,8 @@
 
 @implementation TouchDrawView
 
+@synthesize selectedLine;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,6 +23,20 @@
         
         [self setBackgroundColor:[UIColor whiteColor]];
         [self setMultipleTouchEnabled:YES];
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                        action:@selector(tap:)];
+        [self addGestureRecognizer:tapRecognizer];
+        
+        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                          action:@selector(longPress:)];
+        [self addGestureRecognizer:longPressRecognizer];
+        
+        moveRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                 action:@selector(moveLine:)];
+        [moveRecognizer setDelegate:self];
+        [moveRecognizer setCancelsTouchesInView:NO];
+        [self addGestureRecognizer:moveRecognizer];
     }
     
     return self;
@@ -48,6 +64,20 @@
         CGContextAddLineToPoint(context, [line end].x, [line end].y);
         CGContextStrokePath(context);
     }
+    
+    // If there is a selected line, draw it
+    if ([self selectedLine]) {
+        NSLog(@"Found line");
+        [[UIColor greenColor] set];
+        CGContextMoveToPoint(context, [[self selectedLine] begin].x, [[self selectedLine] begin].y);
+        CGContextAddLineToPoint(context, [[self selectedLine] end].x, [[self selectedLine] end].y);
+        CGContextStrokePath(context);
+    }
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
 }
 
 #pragma mark Custom Methods
@@ -81,7 +111,87 @@
     [self setNeedsDisplay];
 }
 
-#pragma mark Touch methods
+- (Line *)lineAtPoint:(CGPoint)p
+{
+    // Find a line close to p
+    for (Line *line in completeLines) {
+        CGPoint start = [line begin];
+        CGPoint end = [line end];
+        
+        // Check a few points on the line
+        for (float t = 0.0; t <= 1.0; t += 0.5) {
+            float x = start.x + t * (end.x - start.x);
+            float y = start.y + t * (end.y - start.y);
+            
+            // If the tapped point is within 20 points, let's return this line
+            if (hypot(x - p.x, y - p.y) < 20.0) {
+                return line;
+            }
+        }
+    }
+    
+    // If nothing is close enough to the tapped point, then we didn't select a line
+    return nil;
+}
+
+- (void)deleteLine:(id)sender
+{
+    // Remove the selected line from from the list of completeLines
+    [completeLines removeObject:[self selectedLine]];
+    
+    // Redraw everything
+    [self setNeedsDisplay];
+}
+
+- (void)longPress:(UIGestureRecognizer *)gr
+{
+    if ([gr state] == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gr locationInView:self];
+        [self setSelectedLine:[self lineAtPoint:point]];
+        
+        if ([self selectedLine]) {
+            [linesInProcess removeAllObjects];
+        }
+    } else if ([gr state] == UIGestureRecognizerStateEnded) {
+        [self setSelectedLine:nil];
+    }
+    
+    [self setNeedsDisplay];
+}
+
+- (void)moveLine:(UIPanGestureRecognizer *)gr
+{
+    if (![self selectedLine]) {
+        return;
+    }
+    
+    // When the pan recognizer changes its position...
+    if ([gr state] == UIGestureRecognizerStateChanged) {
+        // How far has the pan moved?
+        CGPoint translation = [gr translationInView:self];
+        
+        // Add the transation to the current begin and end points of the line
+        CGPoint begin = [[self selectedLine] begin];
+        CGPoint end = [[self selectedLine] end];
+        
+        begin.x += translation.x;
+        begin.y += translation.y;
+        end.x += translation.x;
+        end.y += translation.y;
+        
+        // Set the new beginning and end points of the line
+        [[self selectedLine] setBegin:begin];
+        [[self selectedLine] setEnd:end];
+        
+        // Redraw the screen
+        [self setNeedsDisplay];
+        
+        // Reset translation to zero
+        [gr setTranslation:CGPointZero inView:self];
+    }
+}
+
+#pragma mark UIResponder Delegate methods
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -136,6 +246,50 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self endTouches:touches];
+}
+
+#pragma mark Gesture Recognizer methods
+
+- (void)tap:(UIGestureRecognizer *)gr
+{
+    NSLog(@"Recognized tap");
+    
+    CGPoint point = [gr locationInView:self];
+    [self setSelectedLine:[self lineAtPoint:point]];
+    
+    // If we just tapped, remove all lines in process
+    // so that a tap doesn't result in a new line
+    [linesInProcess removeAllObjects];
+    
+    if ([self selectedLine]) {
+        [self becomeFirstResponder];
+        
+        // Grab the menu controller
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        
+        // Create a new "Delete" UIMenuItem
+        UIMenuItem *deleteItem = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteLine:)];
+        [menu setMenuItems:[NSArray arrayWithObject:deleteItem]];
+        
+        // Tell the menu where it should come from and show it
+        [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2) inView:self];
+        [menu setMenuVisible:YES animated:YES];
+    } else {
+        // Hide the menu if no line is selected
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+    }
+    
+    [self setNeedsDisplay];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if (gestureRecognizer == moveRecognizer) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

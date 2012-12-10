@@ -8,13 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TouchDrawView : UIView
+@class Line;
+
+@interface TouchDrawView : UIView <UIGestureRecognizerDelegate>
 {
     NSMutableDictionary *linesInProcess;
     NSMutableArray *completeLines;
+    
+    UIGestureRecognizer *moveRecognizer;
 }
+
+@property (nonatomic, weak) Line *selectedLine;
 
 - (void)clearAll;
 - (void)endTouches:(NSSet *)touches;
+- (Line *)lineAtPoint:(CGPoint)p;
 
 @end
