@@ -15,7 +15,13 @@
     NSMutableDictionary *linesInProcess;
     NSMutableArray *completeLines;
     
-    UIGestureRecognizer *moveRecognizer;
+    UIGestureRecognizer *panRecognizer;
+    float lineWidth;
+    UIColor *drawingColor;
+    
+    UIView *yellowColorPanel;
+    UIView *blueColorPanel;
+    UIView *orangeColorPanel;
 }
 
 @property (nonatomic, weak) Line *selectedLine;
