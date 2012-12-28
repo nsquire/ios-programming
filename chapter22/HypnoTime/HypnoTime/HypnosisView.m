@@ -28,8 +28,8 @@
         // Give it a location
         [boxLayer setPosition:CGPointMake(160.0, 100.0)];
         
-        // Make half-transparent red the background color for the layer
-        UIColor *reddish = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.5];
+        // Make fully opaque red the background color for the layer
+        UIColor *reddish = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0];
         
         // Get a CGColor object with the same color values
         CGColorRef cgReddish = [reddish CGColor];
@@ -51,8 +51,35 @@
         // to fill the contentRect
         [boxLayer setContentsGravity:kCAGravityResizeAspect];
         
-        // Make it a sublayer of the view's layer
+        // Give the layer a rounded corners effect
+        [boxLayer setCornerRadius:15.0];
+        
+        // Give the layer a shaddow
+        [boxLayer setShadowOpacity:1.0];
+        [boxLayer setShadowOffset:CGSizeMake(10.0, 10.0)];
+        [boxLayer setShadowColor:[[UIColor blackColor] CGColor]];
+
+        // Use rasterization settings to hide the shadow under the layer
+        [boxLayer setRasterizationScale:[[UIScreen mainScreen] scale]];
+        [boxLayer setShouldRasterize:YES];
+        [boxLayer setOpacity:0.5];
+        
+        // Add the layer to our main view's layer
         [[self layer] addSublayer:boxLayer];
+        
+        // Add a sub-layer to boxLayer
+        boxLayer2 = [[CALayer alloc] init];
+        [boxLayer2 setBounds:CGRectMake(0.0, 0.0, [boxLayer bounds].size.width / 2.0, [boxLayer bounds].size.height / 2.0)];
+        [boxLayer2 setPosition:CGPointMake(42.5, 42.5)];
+        UIColor *bluish = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.5];
+        CGColorRef cgBluish = [bluish CGColor];
+        [boxLayer2 setBackgroundColor:cgBluish];
+        UIImage *boxLayer2Image = [UIImage imageNamed:@"Time.png"];
+        CGImageRef image2 = [boxLayer2Image CGImage];
+        [boxLayer2 setContents:(__bridge id)image2];
+        [boxLayer2 setContentsRect:CGRectMake(-0.1, -0.1, 1.2, 1.2)];
+        [boxLayer2 setContentsGravity:kCAGravityResizeAspect];
+        [boxLayer addSublayer:boxLayer2];
     }
     
     return self;
