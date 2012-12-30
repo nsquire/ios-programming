@@ -11,10 +11,13 @@
 @interface TimeViewController : UIViewController
 {
     IBOutlet UILabel __weak *timeLabel;
+    __weak IBOutlet UIButton *timeButton;
 }
 
 - (IBAction)showCurrentTime:(id)sender;
 - (void)spinTimeLabel;
 - (void)bounceTimeLabel;
+- (void)moveButton;
+- (void)pulseButton;
 
 @end

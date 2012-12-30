@@ -30,8 +30,9 @@
 
         // Give it an image
         UIImage *i = [UIImage imageNamed:@"Time.png"];
-        [tbi setImage:i];  
+        [tbi setImage:i];
     }
+    
     return self;
 }
 
@@ -48,7 +49,9 @@
     NSLog(@"In: %@ -> %@", [self class], NSStringFromSelector(_cmd));
     
     [super viewWillAppear:animated];
+    
     [self showCurrentTime:nil];
+    [self moveButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -133,15 +136,72 @@
                        nil]];
     
     // Set the duration
-    [bounce setDuration:0.6];
+    //[bounce setDuration:0.6];
+    
+    // Create another key frame animation for opacity
+    CAKeyframeAnimation *opacity = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    
+    [opacity setValues:[NSArray arrayWithObjects:
+                        [NSNumber numberWithFloat:0.7],
+                        [NSNumber numberWithFloat:1.0],
+                        [NSNumber numberWithFloat:0.5],
+                        [NSNumber numberWithFloat:1.0],
+                        [NSNumber numberWithFloat:0.5],
+                        [NSNumber numberWithFloat:0.7],
+                        nil]];
+    
+    // Set the duration
+    //[opacity setDuration:0.6];
+    
+    CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+    [animGroup setAnimations:[NSArray arrayWithObjects:opacity, bounce, nil]];
+    [animGroup setDuration:0.6];
     
     // Animate the layer
-    [[timeLabel layer] addAnimation:bounce forKey:@"bounceAnimation"];
+    [[timeLabel layer] addAnimation:animGroup forKey:@"bounceAndFadeAnimation"];
+}
+
+- (void)moveButton
+{
+    // Add an animation to move the button onto the view
+    CABasicAnimation *moveButtonAnim = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveButtonAnim setFromValue:[NSValue valueWithCGPoint:CGPointMake(-70.0, 67.5)]];
+    [moveButtonAnim setToValue:[NSValue valueWithCGPoint:CGPointMake(160.5, 67.5)]];
+    //[[timeButton layer] setPosition:CGPointMake(160.5, 67.5)];
+    
+    [moveButtonAnim setDuration:0.5];
+    [moveButtonAnim setDelegate:self];
+    
+    [[timeButton layer] addAnimation:moveButtonAnim forKey:@"moveButtonAnim"];
+}
+
+- (void)pulseButton
+{
+    CAKeyframeAnimation *pulse = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    
+    [pulse setValues:[NSArray arrayWithObjects:
+                        [NSNumber numberWithFloat:1.0],
+                        [NSNumber numberWithFloat:0.75],
+                        [NSNumber numberWithFloat:1.0],
+                        nil]];
+    
+    [pulse setDuration:1.5];
+    [pulse setRepeatCount:HUGE_VALF];
+    
+    CAMediaTimingFunction *tf = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [pulse setTimingFunction:tf];
+    
+    [[timeButton layer] addAnimation:pulse forKey:@"pulsingButton"];
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     NSLog(@"%@ finished: %d", anim, flag);
+    CGPoint newPt = [[[timeButton layer] presentationLayer] position];
+    NSLog(@"New point: %f, %f", newPt.x, newPt.y);
+    //[[timeButton layer] setPosition:newPt];
+    [self pulseButton];
+    
 }
 
 @end
