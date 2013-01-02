@@ -20,6 +20,7 @@
 		012AA6DD169250A70019143C /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AA6DC169250A70019143C /* RSSChannel.m */; };
 		012AA6E0169259820019143C /* RSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AA6DF169259820019143C /* RSSItem.m */; };
 		012AA6E4169261170019143C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AA6E3169261170019143C /* WebViewController.m */; };
+		012AA6E7169365EB0019143C /* RSSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AA6E6169365EB0019143C /* RSSCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		012AA6E116925F050019143C /* WSLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSLogging.h; sourceTree = "<group>"; };
 		012AA6E2169261170019143C /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		012AA6E3169261170019143C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		012AA6E5169365EB0019143C /* RSSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSCell.h; sourceTree = "<group>"; };
+		012AA6E6169365EB0019143C /* RSSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,13 +98,15 @@
 				012AA6D91691EB920019143C /* ListViewController.m */,
 				012AA6CA1691EB5D0019143C /* NerdfeedAppDelegate.h */,
 				012AA6CB1691EB5D0019143C /* NerdfeedAppDelegate.m */,
+				012AA6E5169365EB0019143C /* RSSCell.h */,
+				012AA6E6169365EB0019143C /* RSSCell.m */,
 				012AA6DB169250A70019143C /* RSSChannel.h */,
 				012AA6DC169250A70019143C /* RSSChannel.m */,
 				012AA6DE169259820019143C /* RSSItem.h */,
 				012AA6DF169259820019143C /* RSSItem.m */,
-				012AA6E116925F050019143C /* WSLogging.h */,
 				012AA6E2169261170019143C /* WebViewController.h */,
 				012AA6E3169261170019143C /* WebViewController.m */,
+				012AA6E116925F050019143C /* WSLogging.h */,
 				012AA6C21691EB5D0019143C /* Supporting Files */,
 			);
 			path = Nerdfeed;
@@ -110,13 +115,13 @@
 		012AA6C21691EB5D0019143C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				012AA6C31691EB5D0019143C /* Nerdfeed-Info.plist */,
-				012AA6C41691EB5D0019143C /* InfoPlist.strings */,
-				012AA6C71691EB5D0019143C /* main.m */,
-				012AA6C91691EB5D0019143C /* Nerdfeed-Prefix.pch */,
+				012AA6D11691EB5D0019143C /* Default-568h@2x.png */,
 				012AA6CD1691EB5D0019143C /* Default.png */,
 				012AA6CF1691EB5D0019143C /* Default@2x.png */,
-				012AA6D11691EB5D0019143C /* Default-568h@2x.png */,
+				012AA6C41691EB5D0019143C /* InfoPlist.strings */,
+				012AA6C71691EB5D0019143C /* main.m */,
+				012AA6C31691EB5D0019143C /* Nerdfeed-Info.plist */,
+				012AA6C91691EB5D0019143C /* Nerdfeed-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				012AA6DD169250A70019143C /* RSSChannel.m in Sources */,
 				012AA6E0169259820019143C /* RSSItem.m in Sources */,
 				012AA6E4169261170019143C /* WebViewController.m in Sources */,
+				012AA6E7169365EB0019143C /* RSSCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +309,7 @@
 				012AA6D71691EB5D0019143C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -16,6 +16,8 @@
 @property (nonatomic, weak) id parentParserDelegate;
 
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *author;
+@property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *link;
 
 @end

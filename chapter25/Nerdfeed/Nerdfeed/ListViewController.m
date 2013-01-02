@@ -10,6 +10,7 @@
 #import "RSSChannel.h"
 #import "RSSItem.h"
 #import "WebViewController.h"
+#import "RSSCell.h"
 
 @implementation ListViewController
 
@@ -35,14 +36,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    RSSCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RSSCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        cell = [[RSSCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RSSCell"];
     }
     
     RSSItem *item = [[channel items] objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:[item title]];
+    
+    [[cell titleLabel] setText:[item title]];
+    [[cell authorLabel] setText:[item author]];
+    [[cell categoryLabel] setText:[item category]];
     
     return cell;
 }
@@ -68,6 +72,12 @@
     
     // Set the title of the web view controller's navigation item
     [[webViewController navigationItem] setTitle:[entry title]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView
+    heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90.0;
 }
 
 - (void)fetchEntries

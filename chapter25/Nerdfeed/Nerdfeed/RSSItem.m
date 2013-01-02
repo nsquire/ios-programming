@@ -23,6 +23,12 @@
     if ([elementName isEqual:@"title"]) {
         currentString = [[NSMutableString alloc] init];
         [self setTitle:currentString];
+    } else if ([elementName isEqual:@"author"]) {
+        currentString = [[NSMutableString alloc] init];
+        [self setAuthor:currentString];
+    } else if ([elementName isEqual:@"category"]) {
+        currentString = [[NSMutableString alloc] init];
+        [self setCategory:currentString];
     } else if ([elementName isEqual:@"link"]) {
         currentString = [[NSMutableString alloc] init];
         [self setLink:currentString];

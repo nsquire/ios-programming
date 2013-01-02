@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WebViewController : UIViewController
+@interface WebViewController : UIViewController <UIWebViewDelegate>
+{
+    UIBarButtonItem *backButton;
+    UIBarButtonItem *forwardButton;
+    //UIActivityIndicatorView *activityIndicator;
+    UIToolbar *toolbar;
+}
 
 @property (nonatomic, readonly) UIWebView *webView;
 
