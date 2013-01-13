@@ -11,15 +11,20 @@
 
 @implementation RSSChannel
 
-@synthesize parentParserDelegate, title, infoString, items;
+@synthesize parentParserDelegate, title, infoString, items, subItems;
+
+#pragma mark - View Lifecycle Methods
 
 - (id)init
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     self = [super init];
     
     if (self) {
         // Create the container for the RSSItems this channel has
         items = [[NSMutableArray alloc] init];
+        subItems = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -28,11 +33,21 @@
 #pragma mark - NSXMLParser Delegate Methods
 
 - (void)parser:(NSXMLParser *)parser
+foundCharacters:(NSString *)string
+{
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
+    [currentString appendString:string];
+}
+
+- (void)parser:(NSXMLParser *)parser
     didStartElement:(NSString *)elementName
        namespaceURI:(NSString *)namespaceURI
       qualifiedName:(NSString *)qName
          attributes:(NSDictionary *)attributeDict
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     WSLog(@"\t%@ found a %@ element", self, elementName);
     
     if ([elementName isEqual:@"title"]) {
@@ -57,16 +72,12 @@
 }
 
 - (void)parser:(NSXMLParser *)parser
-    foundCharacters:(NSString *)string
-{
-    [currentString appendString:string];
-}
-
-- (void)parser:(NSXMLParser *)parser
     didEndElement:(NSString *)elementName
      namespaceURI:(NSString *)namespaceURI
     qualifiedName:(NSString *)qName
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // If we are in an element that we are collecting the string for,
     // this appropriately releases our hold on it and the permanent ivar keeps
     // ownership of it.  If we weren't parsing such an element, currentString
@@ -81,10 +92,49 @@
     }
 }
 
+#pragma mark - Instance Methods
+
+- (void)setupSubItems:(RSSItem *)item previousItem:(RSSItem *)previousItem titleString:(NSString *)titleString replyRegex:(NSRegularExpression *)replyRegex
+{
+    // Logic for setting item's parent posts
+    // TODO: Is there a simpler approach?
+    if ([items objectAtIndex:0] != item) {
+        NSArray *reMatches = [replyRegex matchesInString:titleString options:0 range:NSMakeRange(0, [titleString length])];
+        if ([reMatches count] > 0) {
+            NSLog(@"Found RE: match");
+            NSLog(@"Prevous title: %@ -> %@, Item title: %@ -> %@", [previousItem title], previousItem, [item title], item);
+            
+            int length = [[previousItem title] length] >= [[item title] length] ? [[item title] length] : [[previousItem title] length];
+            
+            if ([[[previousItem title] substringToIndex:length] isEqualToString:[[item title] substringToIndex:length]]) {
+                NSLog(@"Titles match");
+                [subItems addObject:item];
+                
+                if ([previousItem parentPost] != nil) {
+                    [item setParentPost:[previousItem parentPost]];
+                    // Added subitems to item
+                    [[[previousItem parentPost] subItems] addObject:item];
+                } else {
+                    [item setParentPost:previousItem];
+                    // Added subitems to item
+                    [[previousItem subItems] addObject:item];
+                }
+                
+                NSLog(@"Item parent: %@ -> %@", [[item parentPost] title], [item parentPost]);
+            }
+        }
+    }
+}
+
 - (void)trimItemTitles
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // Create a regular expression with the pattern: Author
-    NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@".* :: (.*) :: .*" options:0 error:nil];
+    NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"(.*) :: (.*) :: .*" options:0 error:nil];
+    
+    // Used to keep track of the previous item in the iteration belowk
+    RSSItem *previousItem = nil;
     
     // Loop through every title of the items in channel
     for (RSSItem *item in items) {
@@ -100,18 +150,40 @@
             // Print the location of the match in the string and the string
             NSTextCheckingResult *result = [matches objectAtIndex:0];
             NSRange r = [result range];
+            NSLog(@"----------------------------------------------------------------------------");
             NSLog(@"Match at {%d, %d} for %@!", r.location, r.length, itemTitle);
             
-            // One capture group, so two ranges, let's verify
-            if ([result numberOfRanges] == 2) {
-                 // Pull out the 2nd range, which will be the capture group
-                NSRange r = [result rangeAtIndex:1];
+            // Two capture groups, so three ranges, let's verify
+            if ([result numberOfRanges] == 3) {
+                // Pull out the 2nd range, which will be the subforum capture group
+                NSRange subforumRange = [result rangeAtIndex:1];
                 
-                // Set the title of the item to the string within the capture group
-                [item setTitle:[itemTitle substringWithRange:r]];
+                // Pull out the 3rd range, which will be the title capture group
+                NSRange titleRange = [result rangeAtIndex:2];
+                
+                // Get a new string without the replys part - using regex
+                NSString *titleString = [itemTitle substringWithRange:titleRange];
+                NSRegularExpression *replyRegex = [NSRegularExpression regularExpressionWithPattern:@"\\bre: \\b" options:NSRegularExpressionCaseInsensitive error:nil];
+                NSString *titleStringWithoutReply = [replyRegex stringByReplacingMatchesInString:titleString options:NSRegularExpressionCaseInsensitive range:NSMakeRange(0, [titleString length]) withTemplate:@""];
+                
+                // Set the title of the item
+                [item setTitle:titleStringWithoutReply];
+                
+                // Set the detail text label of the cell to the string within the subforum capture group
+                [item setSubtitle:[itemTitle substringWithRange:subforumRange]];
+                
+                // Setup our sub-items based on entry titles
+                [self setupSubItems:item previousItem:previousItem titleString:titleString replyRegex:replyRegex];
             }
         }
+        
+        previousItem = item;
     }
+    
+    [items removeObjectsInArray:subItems];
+    
+    NSLog(@"\nItems: %@", items);
+    NSLog(@"Subitems: %@", subItems);
 }
 
 @end

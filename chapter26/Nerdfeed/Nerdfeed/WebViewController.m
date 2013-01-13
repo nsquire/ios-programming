@@ -15,6 +15,8 @@
 
 - (void)loadView
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // Create an instance of UIWebView as large as the screen
     CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
     UIWebView *wv = [[UIWebView alloc] initWithFrame:screenFrame];
@@ -27,11 +29,15 @@
 
 - (UIWebView *)webView
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     return (UIWebView *)[self view];
 }
 
 - (void)listViewController:(ListViewController *)lvc handleObject:(id)object
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // Cast the passed object to RSSItem
     RSSItem *entry = object;
     
@@ -53,17 +59,22 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // If this bar button item doesn't have a title, it won't appear at all
     [barButtonItem setTitle:@"List"];
     
     // Take this bar button item and put it on the left side of our nav item
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
+    [self setListNavButton:barButtonItem];
 }
 
 - (void)splitViewController:(UISplitViewController *)svc
      willShowViewController:(UIViewController *)aViewController
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // Remove the bar button item from  our navigation item
     // We'll double check that its the correct button, even though we know it is
     if (barButtonItem == [[self navigationItem] leftBarButtonItem]) {

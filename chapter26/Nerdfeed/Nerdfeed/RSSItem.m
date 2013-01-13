@@ -10,7 +10,18 @@
 
 @implementation RSSItem
 
-@synthesize parentParserDelegate, title, link;
+@synthesize parentParserDelegate, title, link, parentPost, subItems;
+
+-(id)init
+{
+    self = [super init];
+    
+    if (self) {
+        subItems = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
 
 - (void)parser:(NSXMLParser *)parser
     didStartElement:(NSString *)elementName
@@ -18,6 +29,8 @@
       qualifiedName:(NSString *)qName
          attributes:(NSDictionary *)attributeDict
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     WSLog(@"\t\t%@ found %@ element", self, elementName);
     
     if ([elementName isEqual:@"title"]) {
@@ -32,6 +45,8 @@
 - (void)parser:(NSXMLParser *)parser
     foundCharacters:(NSString *)string
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     [currentString appendString:string];
 }
 
@@ -40,6 +55,8 @@
      namespaceURI:(NSString *)namespaceURI
     qualifiedName:(NSString *)qName
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     currentString = nil;
     
     if ([elementName isEqual:@"item"]) {

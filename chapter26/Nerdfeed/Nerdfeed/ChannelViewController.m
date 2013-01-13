@@ -14,12 +14,16 @@
 - (NSInteger)tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MLog(@"In: %@ -> %@", [self class], NSStringFromSelector(_cmd));
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
     if (!cell) {
@@ -42,11 +46,13 @@
 - (void)listViewController:(ListViewController *)lvc
               handleObject:(id)object
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     // Make sure the ListViewController gave us the right object
     if (![object isKindOfClass:[RSSChannel class]]) {
         return;
     }
-    
+
     channel = object;
     
     [[self tableView] reloadData];
@@ -57,6 +63,8 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     [barButtonItem setTitle:@"List"];
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 }
@@ -65,6 +73,8 @@
      willShowViewController:(UIViewController *)aViewController
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
+    MLog(@"In: %@ -> %@", [self class] , NSStringFromSelector(_cmd));
+    
     if (barButtonItem == [[self navigationItem] leftBarButtonItem]) {
         [[self navigationItem] setLeftBarButtonItem:nil];
     }

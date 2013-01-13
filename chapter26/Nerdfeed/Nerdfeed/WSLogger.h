@@ -10,9 +10,9 @@
 #define Nerdfeed_WSLogging_h
 
 // Show web service logging info
-#define WSLog(...) NSLog(__VA_ARGS__)
+//#define WSLog(...) NSLog(__VA_ARGS__)
 
 // Do not show web service logging information
-//#define WSLog(...) do {} while(0)
+#define WSLog(...) do {} while(0)
 
 #endif

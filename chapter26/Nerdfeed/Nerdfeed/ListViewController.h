@@ -10,6 +10,7 @@
 
 @class RSSChannel;
 @class WebViewController;
+@class SubListViewController;
 
 @interface ListViewController : UITableViewController <NSURLConnectionDataDelegate, NSXMLParserDelegate>
 {
@@ -19,6 +20,7 @@
 }
 
 @property (nonatomic, strong) WebViewController *webViewController;
+@property (nonatomic, strong) SubListViewController *subListViewController;
 
 - (void)fetchEntries;
 
@@ -27,6 +29,6 @@
 
 @protocol ListViewControllerDelegate
 
-- (void)listViewController:(ListViewController *)lvc handleObject:(id)object;
+- (void)listViewController:(UITableViewController *)lvc handleObject:(id)object;
 
 @end

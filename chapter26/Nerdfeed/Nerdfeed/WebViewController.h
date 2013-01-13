@@ -12,5 +12,6 @@
 @interface WebViewController : UIViewController <ListViewControllerDelegate, UISplitViewControllerDelegate>
 
 @property (nonatomic, readonly) UIWebView *webView;
+@property (nonatomic, strong) UIBarButtonItem *listNavButton;
 
 @end
