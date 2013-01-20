@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONSerializable.h"
 
-@interface RSSItem : NSObject <NSXMLParserDelegate>
+@interface RSSItem : NSObject <NSXMLParserDelegate, JSONSerializable>
 {
     NSMutableString *currentString;
 }
 
 @property (nonatomic, weak) id parentParserDelegate;
-
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *link;
 
