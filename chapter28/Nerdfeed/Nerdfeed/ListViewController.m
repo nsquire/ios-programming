@@ -18,6 +18,7 @@
 
 @synthesize webViewController;
 
+#pragma mark -
 #pragma mark Lifecycle methods
 
 -(id)initWithStyle:(UITableViewStyle)style
@@ -220,6 +221,7 @@
     [self fetchEntries];
 }
 
+#pragma mark -
 #pragma mark Picker methods
 
 -(CGRect)pickerFrameWithSize:(CGSize)size
@@ -231,7 +233,7 @@
 }
 
 #pragma mark -
-#pragma mark UIPickerViewDelegate
+#pragma mark UIPickerViewDelegate methods
 
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row
@@ -244,7 +246,7 @@
 }
 
 #pragma mark -
-#pragma mark UIPickerViewDataSource
+#pragma mark UIPickerViewDataSource methods
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
