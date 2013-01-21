@@ -18,6 +18,8 @@
 
 @synthesize webViewController;
 
+#pragma mark Lifecycle methods
+
 -(id)initWithStyle:(UITableViewStyle)style
 {
     NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
@@ -37,11 +39,17 @@
                  forControlEvents:UIControlEventValueChanged];
         [[self navigationItem] setTitleView:rssTypeControl];
         
+        // Set initial number of songs to load to 10
+        selectedRowOfSongsPicker = 1;
+        
         [self fetchEntries];
     }
     
     return self;
 }
+
+#pragma mark -
+#pragma mark UITableViewDelegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -95,6 +103,31 @@
     [webViewController listViewController:self handleObject:entry];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    numberOfSongsPickerChoices = [NSArray arrayWithObjects:[NSNumber numberWithInt:5],
+                                  [NSNumber numberWithInt:10],
+                                  [NSNumber numberWithInt:15],
+                                  [NSNumber numberWithInt:20],
+                                  nil];
+    
+    numberOfSongsPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    [numberOfSongsPicker setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    CGSize pickerSize = [numberOfSongsPicker sizeThatFits:CGSizeZero];
+    [numberOfSongsPicker setFrame:[self pickerFrameWithSize:pickerSize]];
+    [numberOfSongsPicker setShowsSelectionIndicator:YES];
+    [numberOfSongsPicker setDelegate:self];
+    [numberOfSongsPicker setDataSource:self];
+    [numberOfSongsPicker selectRow:selectedRowOfSongsPicker inComponent:0 animated:YES];
+    
+    return numberOfSongsPicker;
+}
+
+#pragma mark -
+#pragma mark Instance methods
+
 - (void)fetchEntries
 {
     NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
@@ -115,6 +148,15 @@
         
         if (!err) {
             channel = obj;
+            
+            if (rssType == ListViewControllerRSSTypeApple) {
+                [[self tableView] setSectionHeaderHeight:162.0];
+                [numberOfSongsPicker setHidden:NO];
+            } else {
+                [[self tableView] setSectionHeaderHeight:0.0];
+                [numberOfSongsPicker setHidden:YES];
+            }
+            
             [[self tableView] reloadData];
         } else {
             UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -130,9 +172,12 @@
     if (rssType == ListViewControllerRSSTypeBNR) {
         [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:completionBlock];
     } else if (rssType == ListViewControllerRSSTypeApple) {
-        [[BNRFeedStore sharedStore] fetchTopSongs:10 withCompletion:completionBlock];
+        [[BNRFeedStore sharedStore] fetchTopSongs:[[numberOfSongsPickerChoices objectAtIndex:selectedRowOfSongsPicker] intValue] withCompletion:completionBlock];
     }
 }
+
+#pragma mark -
+#pragma mark Action methods
 
 - (void)showInfo:(id)sender
 {
@@ -173,6 +218,66 @@
 {
     rssType = [sender selectedSegmentIndex];
     [self fetchEntries];
+}
+
+#pragma mark Picker methods
+
+-(CGRect)pickerFrameWithSize:(CGSize)size
+{
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGRect pickerRect = CGRectMake(0.0, screenRect.size.height - 42.0 - size.height, size.width, size.height);
+    
+    return pickerRect;
+}
+
+#pragma mark -
+#pragma mark UIPickerViewDelegate
+
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    selectedRowOfSongsPicker = row;
+    [self fetchEntries];
+}
+
+#pragma mark -
+#pragma mark UIPickerViewDataSource
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    return [NSString stringWithFormat:@"%@", [numberOfSongsPickerChoices objectAtIndex:row]];
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    //return [[UIScreen mainScreen] applicationFrame].size.width;
+    return 260.0;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 40.0;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    return [numberOfSongsPickerChoices count];
 }
 
 @end

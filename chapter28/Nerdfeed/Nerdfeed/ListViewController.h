@@ -16,10 +16,13 @@ typedef enum {
     ListViewControllerRSSTypeApple
 } ListViewControllerRSSType;
 
-@interface ListViewController : UITableViewController <UITableViewDelegate>
+@interface ListViewController : UITableViewController <UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     RSSChannel *channel;
     ListViewControllerRSSType rssType;
+    NSArray *numberOfSongsPickerChoices;
+    UIPickerView *numberOfSongsPicker;
+    int selectedRowOfSongsPicker;
 }
 
 @property (nonatomic, strong) WebViewController *webViewController;
