@@ -1,9 +1,9 @@
 //
 //  BNRConnection.m
-//  Nerdfeed
+//  ClassSchedule
 //
-//  Created by Nick on 1/20/13.
-//  Copyright (c) 2013 Nick. All rights reserved.
+//  Created by Nick on 1/21/13.
+//  Copyright (c) 2013 Nick Org. All rights reserved.
 //
 
 #import "BNRConnection.h"
@@ -12,7 +12,10 @@ static NSMutableArray *sharedConnectionList = nil;
 
 @implementation BNRConnection
 
-@synthesize request, completionBlock, xmlRootObject, jsonRootObject;
+@synthesize request, completionBlock, jsonRootObject;
+
+#pragma mark -
+#pragma mark Lifecycle methods
 
 -(id)initWithRequest:(NSURLRequest *)req
 {
@@ -27,29 +30,29 @@ static NSMutableArray *sharedConnectionList = nil;
     return self;
 }
 
+#pragma mark -
+#pragma mark Instance methods
+
 -(void)start
 {
     NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
     
-    // Initialize container for data collected from NSURLConnection
     container = [[NSMutableData alloc] init];
-    
-    // Spawn connection
     internalConnection = [[NSURLConnection alloc] initWithRequest:[self request]
                                                          delegate:self
                                                  startImmediately:YES];
     
-    // If this is the first connection started, create the array
     if (!sharedConnectionList) {
         sharedConnectionList = [[NSMutableArray alloc] init];
     }
     
-    // Add the connection to the array so it doesn't get destroyed
     [sharedConnectionList addObject:self];
 }
 
-- (void)connection:(NSURLConnection *)connection
-    didReceiveData:(NSData *)data
+#pragma mark -
+#pragma mark NSURLConnectionDataDelegate methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
     
@@ -62,38 +65,28 @@ static NSMutableArray *sharedConnectionList = nil;
     
     id rootObject = nil;
     
-    // If there is a "root object"
-    if ([self xmlRootObject]) {
-        // Create a parser with the incoming data and let the root
-        // object parse its contents
-        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:container];
-        [parser setDelegate:[self xmlRootObject]];
-        [parser parse];
-        rootObject = [self xmlRootObject];
-    } else if ([self jsonRootObject]) {
+    if ([self jsonRootObject]) {
         // Turn JSON data into basic model objects
-        NSDictionary *d = [NSJSONSerialization JSONObjectWithData:container
-                                                          options:0
-                                                            error:nil];
-        
-        // Have the root object construct itself from basic model objects
-        [[self jsonRootObject] readFromJSONDictionary:d];
-        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:container
+                                                             options:0
+                                                               error:nil];
+        [[self jsonRootObject] readFromJSONDictionary:dict];
         rootObject = [self jsonRootObject];
     }
     
-    // Then pass the root object to the completion block - remember,
-    // this is the block that the controller supplied
+    // Then pass the root object to the completion block
     if ([self completionBlock]) {
         [self completionBlock](rootObject, nil);
     }
     
-    // Now, destroy this connection
+    // Destroy this connection
     [sharedConnectionList removeObject:self];
 }
 
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
+#pragma mark -
+#pragma mark NSURLConnectionDelegate methods
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
     
@@ -102,7 +95,7 @@ static NSMutableArray *sharedConnectionList = nil;
         [self completionBlock](nil, error);
     }
     
-    // Destory this connection
+    // Destroy this connection
     [sharedConnectionList removeObject:self];
 }
 
