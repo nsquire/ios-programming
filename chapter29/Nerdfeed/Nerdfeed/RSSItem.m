@@ -12,6 +12,29 @@
 
 @synthesize parentParserDelegate, title, link, publicationDate;
 
+#pragma mark -
+#pragma mark NSCoding Protocol Methods
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:title forKey:@"title"];
+    [aCoder encodeObject:link forKey:@"link"];
+    [aCoder encodeObject:publicationDate forKey:@"publicationDate"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        [self setTitle:[aDecoder decodeObjectForKey:@"title"]];
+        [self setLink:[aDecoder decodeObjectForKey:@"link"]];
+        [self setPublicationDate:[aDecoder decodeObjectForKey:@"publicationDate"]];
+    }
+    
+    return self;
+}
+
 - (void)parser:(NSXMLParser *)parser
     didStartElement:(NSString *)elementName
        namespaceURI:(NSString *)namespaceURI
@@ -77,27 +100,26 @@
     }
 }
 
-#pragma mark -
-#pragma mark NSCoding Protocol Methods
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
+- (NSDictionary *)toJSONDictionary
 {
-    [aCoder encodeObject:title forKey:@"title"];
-    [aCoder encodeObject:link forKey:@"link"];
-    [aCoder encodeObject:publicationDate forKey:@"publicationDate"];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
+    // Dictionary with href=link for song
+    NSDictionary *href = [NSDictionary dictionaryWithObjectsAndKeys: link, @"href", nil];
     
-    if (self) {
-        [self setTitle:[aDecoder decodeObjectForKey:@"title"]];
-        [self setLink:[aDecoder decodeObjectForKey:@"link"]];
-        [self setPublicationDate:[aDecoder decodeObjectForKey:@"publicationDate"]];
-    }
+    // Dictionary with attributes=href (created above)
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: href, @"attributes", nil];
     
-    return self;
+    // Create the array of attributes. The .mpa (player link) is the second one; so just use two attributes
+    NSArray *jLink = [[NSArray alloc]initWithObjects: attributes, attributes, nil];
+    
+    // Dictionary with label=title of item
+    NSDictionary *label = [NSDictionary dictionaryWithObjectsAndKeys: title, @"label", nil];
+    
+    // Finally, dictionary with all of the above
+    NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys: label, @"title", jLink, @"link", nil];
+    
+    //NSLog(@"---%@+++", jsonDict);
+    
+    return jsonDict;
 }
 
 #pragma mark -

@@ -43,6 +43,14 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    [super viewWillAppear:animated];
+    [[self tableView] reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
@@ -59,7 +67,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"UITableViewCell"];
     }
     
     RSSItem *item = [[channel items] objectAtIndex:[indexPath row]];
@@ -69,6 +77,12 @@
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     } else {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    
+    if ([[BNRFeedStore sharedStore] isFavorite:item]) {
+        [[cell detailTextLabel] setText:@"*favorite"];
+    } else {
+        [[cell detailTextLabel] setText:@""];
     }
     
     return cell;

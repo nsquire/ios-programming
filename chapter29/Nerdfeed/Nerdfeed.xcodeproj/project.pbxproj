@@ -79,7 +79,6 @@
 		012AA6AC1691EB5D0019143C = {
 			isa = PBXGroup;
 			children = (
-				01D7D1C216B6EF2600786ECE /* CoreData.framework */,
 				012AA6C11691EB5D0019143C /* Nerdfeed */,
 				012AA6BA1691EB5D0019143C /* Frameworks */,
 				012AA6B81691EB5D0019143C /* Products */,
@@ -97,9 +96,10 @@
 		012AA6BA1691EB5D0019143C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				012AA6BB1691EB5D0019143C /* UIKit.framework */,
-				012AA6BD1691EB5D0019143C /* Foundation.framework */,
+				01D7D1C216B6EF2600786ECE /* CoreData.framework */,
 				012AA6BF1691EB5D0019143C /* CoreGraphics.framework */,
+				012AA6BD1691EB5D0019143C /* Foundation.framework */,
+				012AA6BB1691EB5D0019143C /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,10 +116,10 @@
 				01D7D16916AC08A400786ECE /* JSONSerializable.h */,
 				012AA6D81691EB920019143C /* ListViewController.h */,
 				012AA6D91691EB920019143C /* ListViewController.m */,
+				01D7D1BF16B6E7C400786ECE /* Nerdfeed.xcdatamodeld */,
 				012AA6CA1691EB5D0019143C /* NerdfeedAppDelegate.h */,
 				012AA6CB1691EB5D0019143C /* NerdfeedAppDelegate.m */,
 				012AA6DB169250A70019143C /* RSSChannel.h */,
-				01D7D1BF16B6E7C400786ECE /* Nerdfeed.xcdatamodeld */,
 				012AA6DC169250A70019143C /* RSSChannel.m */,
 				012AA6DE169259820019143C /* RSSItem.h */,
 				012AA6DF169259820019143C /* RSSItem.m */,

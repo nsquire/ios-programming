@@ -8,13 +8,33 @@
 
 #import "WebViewController.h"
 #import "RSSItem.h"
+#import "BNRFeedStore.h"
 
 @implementation WebViewController
 
 @synthesize webView;
 
+- (id)init
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    self = [super init];
+    
+    if (self) {
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:@"Favorite"
+                                                                style:UIBarButtonItemStyleBordered
+                                                               target:self
+                                                               action:@selector(toggleItemAsFavorite:)];
+        [[self navigationItem] setRightBarButtonItem:bbi];
+    }
+    
+    return self;
+}
+
 - (void)loadView
 {
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
     // Create an instance of UIWebView as large as the screen
     CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
     UIWebView *wv = [[UIWebView alloc] initWithFrame:screenFrame];
@@ -27,25 +47,35 @@
 
 - (UIWebView *)webView
 {
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
     return (UIWebView *)[self view];
 }
 
 - (void)listViewController:(ListViewController *)lvc handleObject:(id)object
 {
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
     // Cast the passed object to RSSItem
-    RSSItem *entry = object;
+    item = object;
     
     // Make sure that we are really dealing with an RSSItem
-    if (![entry isKindOfClass:[RSSItem class]]) {
+    if (![item isKindOfClass:[RSSItem class]]) {
         return;
     }
     
     // Grab the info from the item and push it into the appropriate views
-    NSURL *url = [NSURL URLWithString:[entry link]];
+    NSURL *url = [NSURL URLWithString:[item link]];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     [[self webView] loadRequest:req];
     
-    [[self navigationItem] setTitle:[entry title]];
+    [[self navigationItem] setTitle:[item title]];
+    
+    if ([[BNRFeedStore sharedStore] isFavorite:item]) {
+        [[[self navigationItem] rightBarButtonItem] setTitle:@"Unfavorite"];
+    } else {
+        [[[self navigationItem] rightBarButtonItem] setTitle:@"Favorite"];
+    }
 }
 
 - (void)splitViewController:(UISplitViewController *)svc
@@ -53,6 +83,8 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
     // If this bar button item doesn't have a title, it won't appear at all
     [barButtonItem setTitle:@"List"];
     
@@ -64,10 +96,25 @@
      willShowViewController:(UIViewController *)aViewController
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
     // Remove the bar button item from  our navigation item
     // We'll double check that its the correct button, even though we know it is
     if (barButtonItem == [[self navigationItem] leftBarButtonItem]) {
         [[self navigationItem] setLeftBarButtonItem:nil];
+    }
+}
+
+- (void)toggleItemAsFavorite:(id)sender
+{
+    NSLog(@"In: %@->%@", [self class], NSStringFromSelector(_cmd));
+    
+    if ([[BNRFeedStore sharedStore] isFavorite:item]) {
+        [[BNRFeedStore sharedStore] removeItemAsFavorite:item];
+        [[[self navigationItem] rightBarButtonItem] setTitle:@"Favorite"];
+    } else {
+        [[BNRFeedStore sharedStore] markItemAsFavorite:item];
+        [[[self navigationItem] rightBarButtonItem] setTitle:@"Unfavorite"];
     }
 }
 

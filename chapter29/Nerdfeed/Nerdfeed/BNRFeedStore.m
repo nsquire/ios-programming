@@ -100,7 +100,7 @@
     [connection setCompletionBlock:^(RSSChannel *obj, NSError *err) {
        // This is the store's callback code
         if (!err) {
-            [channelCopy addItemsFromChannel:obj];
+            [channelCopy addItemsFromChannel:obj withItemCount:100];
             [NSKeyedArchiver archiveRootObject:channelCopy toFile:cachePath];
         }
         
@@ -137,16 +137,27 @@
             // in completion block
             NSLog(@"Reading cache!");
             
-            RSSChannel *cachedChannel = [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];
+            RSSChannel *cachedChannel = [[RSSChannel alloc]init];
+            NSData *jsonData= [NSData dataWithContentsOfFile:cachePath];
+            //NSLog(@"archived json data---%@++++", jsonData);
             
-            if (cachedChannel) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    // Execute the controller's completion block to reload its table
-                    block(cachedChannel, nil);
-                }];
+            if (jsonData) {
+                // parse the JSON data into what is ultimately an NSDictionary
+                NSError *parseError = nil;
+                NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&parseError];
                 
-                // Don't need to make the request, just get out of this method
-                return;
+                if (! parseError) {
+                    // Parse the the dictionary into our objects
+                    [cachedChannel readFromJSONDictionary:jsonDictionary];
+                    
+                    // Execute the controller's completion block to reload its table
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        block(cachedChannel, nil);
+                    }];
+                    
+                    // Don't need to make the request; just get out this method.
+                    return;
+                }
             }
         }
     }
@@ -166,7 +177,8 @@
         // If everything went smoothly, save the channel to disk and set cache date
         if (!err) {
             [self setTopSongsCacheDate:[NSDate date]];
-            [NSKeyedArchiver archiveRootObject:obj toFile:cachePath];
+            //[NSKeyedArchiver archiveRootObject:obj toFile:cachePath];
+            [[obj dictionaryToJson] writeToFile:cachePath atomically:YES];
         }
         
         // This is the controller's completion code:
@@ -208,6 +220,58 @@
     }
     
     // If Core Data has never seen this link, then it hasn't been read
+    return NO;
+}
+
+- (void)markItemAsFavorite:(RSSItem *)item
+{
+    // Avoid duplicates
+    if ([self isFavorite:item]) {
+        return;
+    }
+    
+    // Insert link of favorite item
+    NSManagedObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"Favorite" inManagedObjectContext:context];
+    [obj setValue:[item link] forKey:@"urlString"];
+    
+    // Save changes
+    [context save:nil];
+}
+
+- (void)removeItemAsFavorite:(RSSItem *)item;
+{
+    // Avoid delete if not needed
+    if (![self isFavorite:item]) {
+        return;
+    }
+    
+    NSFetchRequest *req = [[NSFetchRequest alloc] initWithEntityName:@"Favorite"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [item link]];
+    [req setPredicate:pred];
+    
+    NSArray *entries = [context executeFetchRequest:req error:nil];
+    if ([entries count] > 0) {
+        for (NSManagedObject *obj in entries) {
+            [context deleteObject:obj];
+        }
+    }
+    
+}
+
+- (BOOL)isFavorite:(RSSItem *)item
+{
+    // Create a request to fetch all favorites with the same urlString as this item's
+    NSFetchRequest *req = [[NSFetchRequest alloc] initWithEntityName:@"Favorite"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"urlString LIKE %@", [item link]];
+    [req setPredicate:pred];
+    
+    // Fetch all links with the same urlString as this one,
+    // if one matches this item is a favorite
+    NSArray *entries = [context executeFetchRequest:req error:nil];
+    if ([entries count] > 0) {
+        return YES;
+    }
+    
     return NO;
 }
 

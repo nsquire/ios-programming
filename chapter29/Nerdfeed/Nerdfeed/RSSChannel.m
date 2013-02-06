@@ -101,6 +101,55 @@
     }
 }
 
+- (NSDictionary *)toJSONDictionary
+{
+    NSMutableArray *dictionaryItems = [[NSMutableArray alloc] init];
+    
+    // Create the array of entries
+    for (RSSItem *i in items) {
+        [dictionaryItems addObject: [i toJSONDictionary]];
+    }
+    
+    // Dictionary with label=apple rights; this is the info of the channel.
+    NSDictionary *rights = [NSDictionary dictionaryWithObjectsAndKeys: infoString, @"label", nil];
+    
+    // Dictionary with label=title rights; this is the title of the channel.
+    NSDictionary *jTitle = [NSDictionary dictionaryWithObjectsAndKeys: title, @"label", nil];
+    
+    // Dictionary with feed including all of the above items
+    NSDictionary *feed = [NSDictionary dictionaryWithObjectsAndKeys:jTitle, @"title", rights, @"rights", dictionaryItems, @"entry", nil];
+    
+    // Finally, a dictionary entry with the feed as the only item
+    NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys: feed, @"feed", nil];
+    
+    NSLog(@"[[[%@]]]", jsonDictionary);
+    
+    return jsonDictionary;
+}
+
+- (NSData *)dictionaryToJson
+{
+    // Convert the channel data to a dictionary
+    NSDictionary *jsonDictionary = [self toJSONDictionary];
+    
+    if ([NSJSONSerialization isValidJSONObject: jsonDictionary]) {
+        
+        // convert the json object to NSData
+        NSError* error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary
+                                                           options:kNilOptions
+                                                             error:&error];
+        
+        //NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        //NSLog(@"JSON Output: %@", jsonString);
+        
+        if (!error)
+            return jsonData;
+    }
+    
+    return nil;
+}
+
 - (void)trimItemTitles
 {
     // Create a regular expression with the pattern: Author
@@ -119,8 +168,7 @@
         if ([matches count] > 0) {
             // Print the location of the match in the string and the string
             NSTextCheckingResult *result = [matches objectAtIndex:0];
-            NSRange r = [result range];
-            NSLog(@"Match at {%d, %d} for %@!", r.location, r.length, itemTitle);
+            WSLog(@"Match at {%d, %d} for %@!", r.location, r.length, itemTitle);
             
             // One capture group, so two ranges, let's verify
             if ([result numberOfRanges] == 2) {
@@ -174,6 +222,37 @@
         return [[obj2 publicationDate] compare:[obj1 publicationDate]];
     }];
 }
+
+- (void)addItemsFromChannel:(RSSChannel *)otherChannel withItemCount:(int)number
+{
+    if (number > 0) {
+        /*for (RSSItem *item in [otherChannel items]) {
+            // If self's items does not contain this item, add it
+            if (![[self items] containsObject:item]) {
+                [[self items] addObject:item];
+            }
+        }
+        
+        // Sort the array of items by publication date
+        [[self items] sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj2 publicationDate] compare:[obj1 publicationDate]];
+        }];*/
+        
+        [self addItemsFromChannel:otherChannel];
+        
+        // Catch so that the cache only contains the designated number of objects
+        if ([[self items] count] >= number) {
+            int diff = ([[self items] count] - number);
+            for (int i = 0; i < diff; i++) {
+                NSLog(@"Removing the bottom item...");
+                [[self items] removeLastObject];
+            }
+        }
+        
+        NSLog(@"Number of items in items: %u", [[self items] count]);
+    }
+}
+
 
 #pragma mark -
 #pragma mark NSCopying Protocol Methods

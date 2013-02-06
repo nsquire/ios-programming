@@ -9,8 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "ListViewController.h"
 
+@class RSSItem;
+
 @interface WebViewController : UIViewController <ListViewControllerDelegate, UISplitViewControllerDelegate>
+{
+    RSSItem *item;
+}
 
 @property (nonatomic, readonly) UIWebView *webView;
+
 
 @end

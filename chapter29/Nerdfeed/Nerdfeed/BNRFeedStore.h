@@ -28,4 +28,8 @@
 - (void)markItemAsRead:(RSSItem *)item;
 - (BOOL)hasItemBeenRead:(RSSItem *)item;
 
+- (void)markItemAsFavorite:(RSSItem *)item;
+- (void)removeItemAsFavorite:(RSSItem *)item;
+- (BOOL)isFavorite:(RSSItem *)item;
+
 @end
